@@ -1,0 +1,8 @@
+env
+*.log
+Frontend/env/
+Frontend/Backend/*
+Frontend/Frontend/*
+Backend/static
+Backend/media
+Backend/logs
