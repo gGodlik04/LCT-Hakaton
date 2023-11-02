@@ -20,7 +20,7 @@ services:
         restart: always
         build:
             context: .
-            dockerfile: docker/python/Dockerfile
+            dockerfile: docker/backend/Dockerfile
         volumes:
             - ./Backend:/srv/www/Backend
         expose:
