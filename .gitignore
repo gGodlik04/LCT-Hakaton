@@ -1,4 +1,6 @@
 env
+.env
+venv
 *.log
 Frontend/env/
 Frontend/Backend/*

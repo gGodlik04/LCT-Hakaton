@@ -3,6 +3,7 @@ version: '3'
 volumes:
     pgdata:
         driver: local
+
 services:
     nginx:
         restart: always
@@ -12,13 +13,10 @@ services:
         ports:
           - "80:8080"
         volumes:
-            - ./Backend/static:/srv/www/Backend/static
-            - ./Backend/media:/srv/www/Backend/media
-            - ./Backend/logs:/srv/www/Backend/logs
             - ./docker/nginx:/etc/nginx/conf.d
         depends_on:
-            - python
-    python:
+            - backend
+    backend:
         restart: always
         build:
             context: .
@@ -29,6 +27,7 @@ services:
           - 8000
         ports:
             - 8000:8000
+
         command: "gunicorn -c gunicorn.py Backend.wsgi"
     postgres:
         image: postgres:9.3.22
