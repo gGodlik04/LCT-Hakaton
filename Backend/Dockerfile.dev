@@ -2,7 +2,7 @@
 FROM python:3.11
 
 # set work directory
-WORKDIR /srv/www/Backend
+WORKDIR /app
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -10,5 +10,5 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./Backend  /srv/www/Backend
+COPY . .
 RUN pip install -r requirements.txt

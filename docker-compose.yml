@@ -1,36 +1,7 @@
-version: '3'
-
-volumes:
-    pgdata:
-        driver: local
-
+version: '3.9'
 services:
-    nginx:
-        restart: always
-        image: nginx:latest
-        expose:
-          - 8080
-        ports:
-          - "80:8080"
-        volumes:
-            - ./docker/nginx:/etc/nginx/conf.d
-        depends_on:
-            - backend
-    backend:
-        restart: always
-        build:
-            context: .
-            dockerfile: docker/backend/Dockerfile
-        volumes:
-            - ./Backend:/srv/www/Backend
-        expose:
-          - 8000
-        ports:
-            - 8000:8000
-
-        command: "gunicorn -c gunicorn.py Backend.wsgi"
     postgres:
-        image: postgres:9.3.22
+        image: postgres:13.3
         ports:
             - 5432:5432
         environment:
@@ -39,4 +10,29 @@ services:
             POSTGRES_DB: database_name
             PGDATA: /var/lib/postgresql/data
         volumes:
-            - pgdata:/var/lib/postgresql/data
+            - ./DbData:/var/lib/postgresql/data
+    nginx:
+        depends_on:
+            - api
+            - frontend
+        restart: always
+        build:
+            dockerfile: Dockerfile.dev
+            context: './nginx'
+        ports:
+            - "3050:80"
+    api:
+        build:
+            dockerfile: Dockerfile.dev
+            context: './Backend'
+        volumes:
+            - ./Backend:/app
+        command: "gunicorn -c gunicorn.py Backend.wsgi"
+    frontend:
+        stdin_open: true
+        build:
+            dockerfile: Dockerfile.dev
+            context: './Frontend'
+        volumes:
+            - /app/node_modules
+            - ./Frontend:/app
