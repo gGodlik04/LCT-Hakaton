@@ -9,7 +9,7 @@ import Profile from '@/components/icons/Profile.vue'
             <Logo/>
         </div>
         <div class="header__auth">
-            <div class="header__auth_employee">Василий Петрович</div>
+            <div class="header__auth_employee">Дерягин Н. В.</div>
             <div class="header__auth_icon">
                 <Profile/>
             </div>
@@ -33,5 +33,11 @@ import Profile from '@/components/icons/Profile.vue'
 
     .header__auth {
         display: flex;
+    }
+
+    .header__auth_icon {
+        position: relative;
+        bottom: 5px;
+        margin-left: 10px;
     }
 </style>
