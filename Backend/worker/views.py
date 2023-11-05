@@ -2,7 +2,7 @@ from rest_framework.decorators import action
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.response import Response
 from worker.models import Task
-from worker.serializers import TaskSerializer
+from worker.serializers import TaskSerializer, CreateTaskSerializer
 
 
 class TaskViewSet(mixins.ListModelMixin,
@@ -11,11 +11,15 @@ class TaskViewSet(mixins.ListModelMixin,
                   mixins.UpdateModelMixin,
                   mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet):
-    serializer_class = TaskSerializer
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return TaskSerializer
+        elif self.action == 'create':
+            return CreateTaskSerializer
+        return TaskSerializer
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Task.objects.filter(employee=user)
+        queryset = Task.objects.all()
         return queryset
 
     def update(self, request, *args, **kwargs):
@@ -24,13 +28,13 @@ class TaskViewSet(mixins.ListModelMixin,
         return Response(serializer)
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-        queryset = queryset.filter(employee=self.request.user)
 
+        queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -40,3 +44,4 @@ class TaskViewSet(mixins.ListModelMixin,
         task = self.get_object()
         serializer = self.get_serializer(task)
         return Response(serializer.data)
+
