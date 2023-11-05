@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Main from '@/pages/Main.vue'
+import MainWorker from '@/pages/MainWorker.vue'
 import Login from '@/pages/Login.vue'
 
 const router = createRouter({
@@ -7,8 +7,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: Main
+      name: 'mainWorker',
+      component: MainWorker
     },
     {
       path: '/login',
