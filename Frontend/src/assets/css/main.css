@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Montserat";
+  src: local("Montserat-bold"), url("@/fonts/Montserrat-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserat";
+  src: local("Montserat-reg"), url("@/fonts/Montserrat-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserat";
+  src: local("Montserat-med"), url("@/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #EFEFEF;
+  font-family: "Montserat";
+}/*# sourceMappingURL=main.css.map */

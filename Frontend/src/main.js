@@ -1,4 +1,4 @@
-import './assets/main.sass'
+import '@/assets/css/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
