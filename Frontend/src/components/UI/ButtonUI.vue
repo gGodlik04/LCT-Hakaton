@@ -12,11 +12,13 @@ export default {
 <style>
     .btn {
         width: max-content;
+        text-align: center;
+        min-width: 40%;
         color: #ffffff;
         padding: 0.5em;
         border: 0.15em solid #ffffff;
-        background-color: #001733;
-        border-radius: 0.5em;
-        font-size: 1em;
+        background-color: #DA5155;
+        border-radius: 10px;
+        font-size: 24px;
     }
 </style>

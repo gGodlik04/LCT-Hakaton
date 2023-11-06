@@ -1,10 +1,15 @@
 <script setup>
 import Header from '@/components/Header.vue'
 
+  const loginFormSubmit = (e) => {
+    document.querySelector('.login__from-auth_submit-button').click();
+  }
+
 </script>
 
 <template>
   <Header></Header>
+  <div class="test"></div>
   <div class="login">
     <div class="login__title">Добро пожаловать!</div>
     <div class="login__role">
@@ -12,20 +17,26 @@ import Header from '@/components/Header.vue'
       <div class="login__role_worker">Сотрудник</div>
     </div>
     <div class="login__form"></div>
-      <form class="login__form-auth" method="#">
+      <form class="login__form-auth" method="post" action="">
         <input class="login__form-auth_input" type="text" autofocus placeholder="Введите логин">
         <input class="login__form-auth_input" type="password" placeholder="Введите пороль">
+        <input type="submit" class="login__from-auth_submit-button"/>
+        <ButtonUI @click="loginFormSubmit" class="login__from-auth_submit-buttonUI">Войти</ButtonUI>
       </form>
   </div>
 </template>
 
 <style scoped>
+  .test {
+    height: 15vh;
+  }
   .login {
     padding: 43px 75px 43px 75px;
-    margin-top: 200px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
-    height: 400px;
+    height: fit-content;
     font-weight: 500;
     border-radius: 30px;
     width: 20%;
@@ -73,5 +84,16 @@ import Header from '@/components/Header.vue'
     width: 100%; 
     margin-top: 20px; 
 	  transition: 1s; 
+  }
+
+  .login__from-auth_submit-button {
+    display: none;
+  }
+
+  .login__from-auth_submit-buttonUI {
+    margin-top: 50px;
+  }
+  .login__from-auth_submit-buttonUI:hover {
+    background-color: #213A8B;
   }
 </style>
