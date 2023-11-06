@@ -22,11 +22,13 @@ onMounted(() => {
   </div>
   <div class="container">
     <Navbar class="navbar"/>
-    <div class="tasks-block">
-      <Task v-for="(task) in tasksStore.tasks" 
-        :key="task.address"
-        :task="task"
-      />
+    <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
+      <template v-for="(task) in tasksStore.currentTasks">
+        <Task v-if="task.status != 4" 
+          :key="task.address"
+          :task="task"
+        />
+      </template>
     </div>
   </div>
   <div class="navigation">

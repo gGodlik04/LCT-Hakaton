@@ -1,22 +1,54 @@
 <script setup>
+import { ref, computed } from 'vue'
+import { useTasksStore } from '../stores/TasksStore';
+import { storeToRefs } from 'pinia';
+
+const tasksStore = useTasksStore();
+const {activeTab} = storeToRefs(tasksStore)
+
+
+const changeTab = (id) => {
+    tasksStore.setActiveTab(id);
+}
+
 
 </script>
 
 <template>
     <div class="navbar">
-        <div class="navbar__current active">
+        <div 
+            @click="changeTab(1)" 
+            class="navbar__current" 
+            :class="(activeTab == 1) ? 'active' : ''"
+        >
             Текущие
         </div>
-        <div class="navbar__map">
+        <div 
+            @click="changeTab(2)" 
+            class="navbar__map"
+            :class="(activeTab == 2) ? 'active' : ''"
+        >
             На карте
         </div>
-        <div class="navbar__week">
+        <div 
+            @click="changeTab(3)" 
+            class="navbar__week"
+            :class="(activeTab == 3) ? 'active' : ''"
+        >
             На неделю
         </div>
-        <div class="navbar__completed">
+        <div 
+            @click="changeTab(4)" 
+            class="navbar__completed"
+            :class="(activeTab == 4) ? 'active' : ''"
+        >
             Выполненные
         </div>
-        <div class="navbar__favorites">
+        <div 
+            @click="changeTab(5)" 
+            class="navbar__favorites"
+            :class="(activeTab == 5) ? 'active' : ''"
+        >
             Избранные
         </div>
     </div>

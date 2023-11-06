@@ -7,7 +7,7 @@ import StatusButton from '@/components/StatusButton.vue';
             type: Object,
             required: true,
             default: () => {}
-        }
+        },
     })
 </script>
 
