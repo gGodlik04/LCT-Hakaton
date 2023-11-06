@@ -10,7 +10,7 @@ import Header from '@/components/Header.vue'
 <template>
   <Header></Header>
   <div class="login-wrapper"></div>
-  <div class="login">
+  <div class="login login-bg">
     <div class="login__title">Добро пожаловать!</div>
     <div class="login__role">
       <div class="login__role_manager active">Менеджер</div>
@@ -42,12 +42,11 @@ import Header from '@/components/Header.vue'
     border-radius: 30px;
     width: 20%;
     border: 3px solid #646464;
+    background-color: #00091F;
+    opacity: 0.8;
+    backdrop-filter: blur(2px);
   }
 
-  .login > child {
-    opacity: 0.8;
-  }
-  
   .login__title {
     font-size: 30px;
     text-align: center;

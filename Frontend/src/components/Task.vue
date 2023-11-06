@@ -1,4 +1,6 @@
 <script setup>
+import Priority from './Priority.vue';
+
     const props = defineProps({
         task: {
             type: Object,
@@ -11,7 +13,9 @@
 <template>
     <div class="task">
         <div class="task__priority">
-            {{ task.priority }}
+            <Priority
+                :priority="task.priority"
+            />
         </div>
         <div class="task__name">
             {{ task.name }}

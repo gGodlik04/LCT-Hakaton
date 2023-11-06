@@ -25,8 +25,13 @@ import Gps from '@/components/icons/Gps.vue'
     .header {
         display: flex;
         justify-content: space-between;
-        padding: 20px;
+        padding: 20px 50px 20px 50px;
         color: #FFFFFF;
+    }
+
+    .header__logo {
+        position: relative;
+        left: 75px;
     }
     
     .header__auth_employee {
