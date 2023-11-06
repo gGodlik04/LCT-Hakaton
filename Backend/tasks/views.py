@@ -1,6 +1,7 @@
 from rest_framework.decorators import action
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from tasks.models import Task
 from tasks.serializers import TaskSerializer, CreateTaskSerializer
 
@@ -11,6 +12,7 @@ class TaskViewSet(mixins.ListModelMixin,
                   mixins.UpdateModelMixin,
                   mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet):
+
     def get_serializer_class(self):
         if hasattr(self.request, 'method'):
             if self.request.method == 'GET':
@@ -31,6 +33,7 @@ class TaskViewSet(mixins.ListModelMixin,
 
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
+
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
