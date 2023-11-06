@@ -25,7 +25,7 @@ import StatusButton from '@/components/StatusButton.vue';
             Адрес: {{ task.address }}
         </div>
         <div class="task__time">
-            Время выполнения: {{ task.time }} час.
+            Время выполнения: {{ task.time }} час
         </div>
         <div class="task__status">
            Cтатус: <StatusButton
