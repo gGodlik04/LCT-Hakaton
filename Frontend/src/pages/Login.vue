@@ -37,25 +37,24 @@ import Header from '@/components/Header.vue'
     color: #FFFFFF;
     margin-left: auto;
     margin-right: auto;
-    height: 450px;
+    height: 350px;
     font-weight: 500;
     border-radius: 30px;
-    width: 20%;
+    width: 15%;
     border: 3px solid #646464;
-    background-color: #00091F;
-    opacity: 0.8;
+    background: rgba(0, 9, 31, 0.8);
     backdrop-filter: blur(2px);
   }
-
   .login__title {
-    font-size: 30px;
+    font-size: 23px;
     text-align: center;
   }
 
   .login__role {
+    opacity: initial;
     display: flex;
     margin-top: 32px;
-    font-size: 30px;
+    font-size: 20px;
     justify-content: space-between;
     align-self: center;
   }
@@ -68,14 +67,14 @@ import Header from '@/components/Header.vue'
   }
 
   .login__form-auth_input {
-    height: 66px;
+    height: 45px;
     width: 100%;
-    margin-top: 36px;
+    margin-top: 25px;
     border-radius: 10px;
     border: none;
     background-color: #D0D0D0;
     text-align: center;
-    font-size: 24px;
+    font-size: 19px;
   }
   
   .active {
@@ -96,9 +95,10 @@ import Header from '@/components/Header.vue'
   }
 
   .login__from-auth_submit-buttonUI {
-    margin-top: 50px;
+    scale: 0.9;
+    margin-top: 35px;
   }
   .login__from-auth_submit-buttonUI:hover {
-    scale: 1.1;
+    scale: 1;
   }
 </style>

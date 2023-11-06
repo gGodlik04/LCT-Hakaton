@@ -3,22 +3,23 @@
   src: local("Montserat-bold"), url("@/fonts/Montserrat-Bold.ttf") format("truetype");
 }
 @font-face {
-  font-family: "Montserat";
+  font-family: "MontseratReg";
   src: local("Montserat-reg"), url("@/fonts/Montserrat-Regular.ttf") format("truetype");
 }
 @font-face {
-  font-family: "Montserat";
+  font-family: "MontseratMed";
   src: local("Montserat-med"), url("@/fonts/Montserrat-Medium.ttf") format("truetype");
 }
 body {
   margin: 0;
+  width: 100vw;
+  height: 100vh;
   padding: 0;
   box-sizing: border-box;
   background-color: #00091F;
   font-family: "Montserat";
   background-image: url("../images/SovcomBankLogo.png");
   background-position: center;
-  background-position-y: 70%;
   background-size: contain;
   background-repeat: no-repeat;
 }/*# sourceMappingURL=main.css.map */
