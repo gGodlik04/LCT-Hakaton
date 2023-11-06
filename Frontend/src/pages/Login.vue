@@ -9,7 +9,7 @@ import Header from '@/components/Header.vue'
 
 <template>
   <Header></Header>
-  <div class="test"></div>
+  <div class="login-wrapper"></div>
   <div class="login">
     <div class="login__title">Добро пожаловать!</div>
     <div class="login__role">
@@ -27,21 +27,27 @@ import Header from '@/components/Header.vue'
 </template>
 
 <style scoped>
-  .test {
+  .login-wrapper {
     height: 15vh;
   }
   .login {
     padding: 43px 75px 43px 75px;
     margin-top: auto;
     margin-bottom: auto;
+    color: #FFFFFF;
     margin-left: auto;
     margin-right: auto;
-    height: fit-content;
+    height: 450px;
     font-weight: 500;
     border-radius: 30px;
     width: 20%;
-    background-color: #FFFFFF;
+    border: 3px solid #646464;
   }
+
+  .login > child {
+    opacity: 0.8;
+  }
+  
   .login__title {
     font-size: 30px;
     text-align: center;
@@ -68,19 +74,19 @@ import Header from '@/components/Header.vue'
     margin-top: 36px;
     border-radius: 10px;
     border: none;
-    background-color: #F1F1F1;
+    background-color: #D0D0D0;
     text-align: center;
     font-size: 24px;
   }
   
   .active {
-    color: #213A8B;
+    color: #AA1418;
   }
   .active:after {
     content: '';
     display: block;
     height: 3px; 
-    background: #213A8B; 
+    background: #AA1418; 
     width: 100%; 
     margin-top: 20px; 
 	  transition: 1s; 
@@ -94,6 +100,6 @@ import Header from '@/components/Header.vue'
     margin-top: 50px;
   }
   .login__from-auth_submit-buttonUI:hover {
-    background-color: #213A8B;
+    scale: 1.1;
   }
 </style>

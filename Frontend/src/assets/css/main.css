@@ -14,6 +14,11 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #EFEFEF;
+  background-color: #00091F;
   font-family: "Montserat";
+  background-image: url("../images/SovcomBankLogo.png");
+  background-position: center;
+  background-position-y: 70%;
+  background-size: contain;
+  background-repeat: no-repeat;
 }/*# sourceMappingURL=main.css.map */

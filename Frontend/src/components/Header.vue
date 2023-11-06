@@ -1,10 +1,14 @@
 <script setup>
 import Logo from '@/components/icons/Logo.vue'
 import Profile from '@/components/icons/Profile.vue'
+import Gps from '@/components/icons/Gps.vue'
 </script>
 
 <template>
     <div class="header">
+        <div class="header__gps">
+            <Gps/>
+        </div>
         <div class="header__logo">
             <Logo/>
         </div>
@@ -19,15 +23,14 @@ import Profile from '@/components/icons/Profile.vue'
 
 <style scoped>
     .header {
-        background-color: #FFFFFF;
         display: flex;
         justify-content: space-between;
         padding: 20px;
-        color: #213A8B;
+        color: #FFFFFF;
     }
     
     .header__auth_employee {
-        font-size: 25px;
+        font-size: 20px;
         vertical-align: middle;
     }
 
@@ -37,7 +40,7 @@ import Profile from '@/components/icons/Profile.vue'
 
     .header__auth_icon {
         position: relative;
-        bottom: 5px;
+        bottom: 1px;
         margin-left: 10px;
     }
 </style>
