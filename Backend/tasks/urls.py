@@ -9,3 +9,4 @@ router.register('task', TaskViewSet, basename='task')
 urlpatterns = [
     path('', include(router.urls)),
 ]
+# edik gay
