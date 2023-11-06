@@ -8,6 +8,7 @@ router.register('accounts', UserView)
 
 urlpatterns = [
     path('', include(router.urls)),
-    re_path(r'^auth', include('djoser.urls.authtoken')),
+    path('register', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 
 ]

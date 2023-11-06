@@ -9,7 +9,7 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=100, verbose_name='Отчество')
     email = models.EmailField(max_length=255, verbose_name='Email пользователя', unique=True)
 
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'role', 'password']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'role', 'password', 'username']
     USERNAME_FIELD = 'email'
 
     class Meta:
