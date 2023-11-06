@@ -46,6 +46,6 @@ import Gps from '@/components/icons/Gps.vue'
     .header__auth_icon {
         position: relative;
         bottom: 1px;
-        margin-left: 10px;
+        margin-left: 28px;
     }
 </style>

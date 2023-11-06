@@ -4,6 +4,7 @@ import Task from '@/components/Task.vue'
 import Navbar from '@/components/Navbar.vue';
 import {ref, onMounted} from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
+import TasksDependsTab from '@/components/TasksDependsTab.vue';
 
 
 const tasksStore = useTasksStore();
@@ -16,19 +17,36 @@ onMounted(() => {
 <template>
   <Header></Header>
   <div class="main-header">
-    <div class="main-header__tasks active">
+    <div class="main-header__tasks">
       Мои задачи
     </div>
   </div>
   <div class="container">
     <Navbar class="navbar"/>
     <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
-      <template v-for="(task) in tasksStore.currentTasks">
-        <Task v-if="task.status != 4" 
-          :key="task.address"
-          :task="task"
+        <TasksDependsTab
+          :tasks="tasksStore.currentTasks"
         />
-      </template>
+    </div>
+    <!-- <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
+        <TasksDependsTab
+          :tasks="tasksStore.tasks"
+        />
+    </div> -->
+    <div class="tasks-block tasks-block-week" v-if="tasksStore.activeTab == 3">
+        <TasksDependsTab
+          :tasks="tasksStore.weekTasks"
+        />
+    </div>
+    <div class="tasks-block tasks-block-completed" v-if="tasksStore.activeTab == 4">
+        <TasksDependsTab
+          :tasks="tasksStore.completedTasks"
+        />
+    </div>
+    <div class="tasks-block tasks-block-favorites" v-if="tasksStore.activeTab == 5">
+        <TasksDependsTab
+          :tasks="tasksStore.favoritesTasks"
+        />
     </div>
   </div>
   <div class="navigation">
