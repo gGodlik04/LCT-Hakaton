@@ -11,6 +11,10 @@ services:
             PGDATA: /var/lib/postgresql/data/dbfiles
         volumes:
             - ./DbData:/var/lib/postgresql/data
+            - ./postgresql.conf:/etc/postgresql.conf
+        container_name: pgdb
+
+
     nginx:
         depends_on:
             - api
@@ -28,6 +32,8 @@ services:
         volumes:
             - ./Backend:/app
         command: "gunicorn -c gunicorn.py Backend.wsgi"
+        depends_on:
+            -   postgres
     frontend:
         stdin_open: true
         build:

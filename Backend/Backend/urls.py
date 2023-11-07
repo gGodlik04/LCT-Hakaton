@@ -1,10 +1,13 @@
 from django.contrib import admin
-from django.urls import path, re_path
+from rest_framework import routers
+from django.urls import path, include
+from tasks.views import *
 
-from api.views import *
+router = routers.DefaultRouter()
+router.register(r'task', TaskViewSet, basename='Task')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('api/hello/', HelloAPIView.as_view(), name='test'),
+    path('api/', include('Backend.api_urls'))
 ]
 
