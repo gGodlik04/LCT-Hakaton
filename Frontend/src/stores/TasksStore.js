@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useTasksStore = defineStore('tasksStore', {
   state: () => ({
@@ -74,10 +75,28 @@ export const useTasksStore = defineStore('tasksStore', {
     favoritesTasks() {
       return this.tasks.filter(el => el.status != 4)
     },
+    tokenLocalStorage() {
+      return window.localStorage.getItem('token', JSON.stringify())
+    },
+    roleLocalStorage() {
+      return window.localStorage.getItem('role', JSON.stringify())
+    }
   },
   actions: {
     setActiveTab(id) {
       this.activeTab = id
+    },
+    async login(email, password) {
+      const resToken = await axios.post('/api/accounts/auth/token/login/', {
+        password: `${password}`,
+        email: `${email}`
+      }).then((response) => {
+        window.localStorage.setItem('token', response.data.auth_token)
+      }).then(async () => {
+        const resRole = await axios.get('/api/accounts/users/me/', {
+          Authorization: `Token ${this.tokenLocalStorage}`
+        })
+      })
     }
   }
 });

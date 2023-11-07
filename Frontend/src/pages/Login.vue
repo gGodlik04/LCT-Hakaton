@@ -1,9 +1,19 @@
 <script setup>
 import Header from '@/components/Header.vue'
+import {ref, onMounted} from 'vue'
+import { useTasksStore } from '../stores/TasksStore';
 
-  const loginFormSubmit = (e) => {
-    document.querySelector('.login__from-auth_submit-button').click();
-  }
+
+const tasksStore = useTasksStore();
+
+
+const email = ref('');
+const password = ref('');
+
+const loginFormSubmit = () => {
+  tasksStore.login(email.value, password.value)
+}
+
 
 </script>
 
@@ -17,10 +27,9 @@ import Header from '@/components/Header.vue'
       <div class="login__role_worker">Сотрудник</div>
     </div>
     <div class="login__form"></div>
-      <form class="login__form-auth" method="post" action="">
-        <input class="login__form-auth_input" type="text" autofocus placeholder="Введите логин">
-        <input class="login__form-auth_input" type="password" placeholder="Введите пороль">
-        <input type="submit" class="login__from-auth_submit-button"/>
+      <form class="login__form-auth">
+        <input class="login__form-auth_input" v-model="email" type="text" autofocus placeholder="Введите email">
+        <input class="login__form-auth_input" v-model="password" type="password" placeholder="Введите пороль">
         <ButtonUI @click="loginFormSubmit" class="login__from-auth_submit-buttonUI">Войти</ButtonUI>
       </form>
   </div>
