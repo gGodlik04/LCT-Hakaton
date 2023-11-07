@@ -68,3 +68,5 @@ class TaskViewSet(mixins.ListModelMixin,
         serializer = self.get_serializer(task)
         return Response(serializer.data)
 
+    def update(self, request, *args, **kwargs):
+        pass
