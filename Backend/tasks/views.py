@@ -1,9 +1,13 @@
 from rest_framework.decorators import action
-from rest_framework import generics, viewsets, mixins, status
+from rest_framework import generics, viewsets, mixins, status, views
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from tasks.models import Task
 from tasks.serializers import TaskSerializer, CreateTaskSerializer
+
+class MixTasksAPIView(views.APIView):
+    pass
+
 
 
 class TaskViewSet(mixins.ListModelMixin,
@@ -12,6 +16,7 @@ class TaskViewSet(mixins.ListModelMixin,
                   mixins.UpdateModelMixin,
                   mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated, ]
 
     def get_serializer_class(self):
         if hasattr(self.request, 'method'):
@@ -27,12 +32,18 @@ class TaskViewSet(mixins.ListModelMixin,
     def update(self, request, *args, **kwargs):
         task = self.get_object()
         serializer = task
+
         return Response(serializer)
 
     def list(self, request, *args, **kwargs):
-
+        user = self.request.user
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
+
+        if user.is_worker_user():
+            queryset = queryset.filter(employee=user)
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
 
         return Response(serializer.data)
 
