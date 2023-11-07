@@ -77,9 +77,9 @@ onMounted(() => {
   .tasks-block {
     grid-area: 'tasks';
     display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-template-rows: fit-content fit-content;
-    gap: 15px;
+    grid-template-columns: 31% 31% 31%;
+    grid-template-rows: 50% 50%;
+    gap: 20px;
   }
 
   .main-header {
