@@ -5,8 +5,11 @@ import pandas as pd
 import requests
 from yandex_geocoder import Client
 
-points = pd.read_sql()
+points = pd.read_sql('')
 points.dropna(inplace=True)
+
+
+def main():
 
 
 def set_task(point):
@@ -165,7 +168,7 @@ def distribute_tasks():
             points_tomorrow = pd.concat([points_tomorrow, pd.DataFrame([point])], ignore_index=True)
         else:
             employees.loc[best_employee_id, "Кол-во отработанных минут"] += best_travel_time + task_time
-            employees.loc[best_employee_id, "Номера взятых задач"].append(index)
+            employees.loc[best_employee_id,"Номера взятых задач"].append(index)
             employees.loc[best_employee_id, "Адрес локации"] = origin
 
 
