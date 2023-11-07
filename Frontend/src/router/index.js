@@ -2,9 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainWorker from '@/pages/MainWorker.vue'
 import MainManager from '@/pages/MainManager.vue'
 import Login from '@/pages/Login.vue'
-// import { useTasksStore } from '../stores/TasksStore';
-
-// const tasksStore = useTasksStore();
+import { useTasksStore } from '../stores/TasksStore';
 
 
 const router = createRouter({
@@ -33,10 +31,16 @@ const router = createRouter({
   ]
 })
 
-// .router.beforeEach((to, from, next) => {
-//   if (tasksStore.tokenLocalStorage && ) {
+router.beforeEach((to, from, next) => {
+  const tasksStore = useTasksStore();
 
-//   }
-// })
+  if (tasksStore.tokenLocalStorage && (tasksStore.roleLocalStorage == 2)) {
+    next('/')
+  }
+
+  // if (tasksStore.tokenLocalStorage && (tasksStore.roleLocalStorage == 1)) {
+  //   next({ name: 'MainManager' })
+  // }
+})
 
 export default router
