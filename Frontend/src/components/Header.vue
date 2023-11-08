@@ -2,12 +2,14 @@
 import Logo from '@/components/icons/Logo.vue'
 import Profile from '@/components/icons/Profile.vue'
 import Gps from '@/components/icons/Gps.vue'
-import { onMounted } from 'vue';
+import { onMounted, computed, ref} from 'vue';
 
 function setTheme(themeName) {
   localStorage.setItem('theme', themeName);
   document.documentElement.className = themeName;
 }
+
+const flagTheme = ref('theme-dark')
 
 onMounted(() => {
   () => {
@@ -27,16 +29,21 @@ function toggleTheme() {
   } else {
       setTheme('theme-light');
   }
+  flagTheme.value = localStorage.getItem('theme');
 }
 </script>
 
 <template>
     <div class="header">
         <div class="header__gps">
-            <Gps/>
+            <Gps
+                :theme="flagTheme"
+            />
         </div>
         <div class="header__logo">
-            <Logo/>
+            <Logo
+                :theme="flagTheme"
+            />
         </div>
         <div class="change-theme">
             <label id="switch" class="switch">
@@ -47,7 +54,9 @@ function toggleTheme() {
         <div class="header__auth">
             <div class="header__auth_employee">Дерягин Н. В.</div>
             <div class="header__auth_icon">
-                <Profile/>
+                <Profile
+                    :theme="flagTheme"
+                />
             </div>
         </div>
     </div>
@@ -58,8 +67,7 @@ function toggleTheme() {
         display: flex;
         justify-content: space-between;
         padding: 20px 50px 20px 50px;
-        color: #FFFFFF;
-        background-color: var(--color-header);
+        color: var(--font-color);
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
     }

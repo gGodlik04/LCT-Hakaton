@@ -91,7 +91,7 @@ onMounted(() => {
     padding: 0 37px 0 37px;
     margin-bottom: 14px;
     font-size: 34px;
-    color: #FFFFFF;
+    color: var(--font-color);
     display: flex;
     justify-content: space-between;
   }

@@ -56,7 +56,7 @@ const changeTab = (id) => {
 
 <style scoped>
 .navbar {
-    color: #FFFFFF;
+    color: var(--font-color);
     font-size: 19px;
     padding: 0 37px 0 37px;
     display: flex;

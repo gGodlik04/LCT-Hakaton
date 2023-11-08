@@ -42,16 +42,15 @@ import StatusButton from '@/components/StatusButton.vue';
 
 <style scoped>
     .task {
-        border: 1px solid #fff;
         height: 18em;
         width: 23em;
-        color: #FFFFFF;
+        color: var(--font-color);
         padding: 26px 30px;
         border-radius: 20px;
-        border: 3px solid #646464;
-        background: rgba(0, 9, 31, 0.8);
+        background: var(--color-accent);
         backdrop-filter: blur(2px);
         font-size: 18px;
+        font-family: 'MontseratReg';
         display: flex;
         flex-direction: column;
     }
