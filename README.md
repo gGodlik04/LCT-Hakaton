@@ -5,3 +5,9 @@
 # Deploy project
 docker-compose up -d -- build     (FIRST DEPLOY)
 docker-compose up -d              (NEXT UP)
+
+
+#Migrations 
+api container :
+python manage.py makemigrations
+python manage.py migrate
