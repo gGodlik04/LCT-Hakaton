@@ -21,8 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig',
-    'managing.apps.ManagerConfig',
     'accounts.apps.AccountsConfig',
+    'directories.apps.DirectoriesConfig'
     'rest_framework',
     'rest_framework.authtoken',
     'djoser'
@@ -88,6 +88,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
