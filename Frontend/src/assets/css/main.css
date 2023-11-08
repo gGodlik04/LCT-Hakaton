@@ -15,6 +15,7 @@
   --color-secondary: #313131;
   --color-accent: rgba(255, 255, 255, 0.7);
   --color-header: #213A8B;
+  --color-status: #213A8B;
   --font-color: #0D1B46;
   --font-color-inactive: #909090;
   --button-color: #DA5155;
@@ -38,6 +39,7 @@
   --color-secondary: #FFFFFF;
   --color-accent: rgba(0, 9, 31, 0.8);
   --color-header: rgba(0, 9, 31, 0);
+  --color-status: #FFFFFF;
   --font-color: #ffffff;
   --button-color: #AA1418;
   --input-color: rgba(0, 9, 31, 0.7);
