@@ -26,21 +26,21 @@ const router = createRouter({
     {
       path: '/manager',
       name: 'MainManager',
-      // component: Login
+      component: MainManager
     },
   ]
 })
 
-router.beforeEach( async(to, from) => {
-  const tasksStore = await useTasksStore();
-  console.log(!tasksStore.tokenLocalStorage);
-  if (!tasksStore.tokenLocalStorage && to.name !== 'login') {
-    return { name: 'login' }
-  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 2 && to.name !== 'mainWorker') {
-    return { name: 'mainWorker' }
-  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 3 && to.name !== 'MainManager') {
-    return { name: 'MainManager' }
-  }
-})
+// router.beforeEach( async(to, from) => {
+//   const tasksStore = await useTasksStore();
+//   console.log(!tasksStore.tokenLocalStorage);
+//   if (!tasksStore.tokenLocalStorage && to.name !== 'login') {
+//     return { name: 'login' }
+//   } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 2 && to.name !== 'mainWorker') {
+//     return { name: 'mainWorker' }
+//   } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 3 && to.name !== 'MainManager') {
+//     return { name: 'MainManager' }
+//   }
+// })
 
 export default router

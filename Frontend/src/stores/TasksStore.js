@@ -86,21 +86,31 @@ export const useTasksStore = defineStore('tasksStore', {
     setActiveTab(id) {
       this.activeTab = id
     },
+
     async login(email, password) {
       const resToken = await axios.post('/api/accounts/auth/token/login/', {
         password: `${password}`,
         email: `${email}`
       }).then((response) => {
-        window.localStorage.setItem('token', response.data.auth_token)
+        window.localStorage.setItem('token', `Token ${response.data.auth_token}`)
       }).then(async () => {
-        console.log(this.tokenLocalStorage);
         const resRole = await axios.get('/api/accounts/users/me/', {
           headers: {
-            Authorization: `Token ${this.tokenLocalStorage}`
+            Authorization: this.tokenLocalStorage
           }
         }).then((response) => {
           window.localStorage.setItem('role', response.data.role)
         })
+      })
+    },
+
+    async fetchTasks() {
+      const resTasks = await axios.get('/api/task/task/', {
+        headers: {
+          Authorization: this.tokenLocalStorage
+        }
+      }).then((res) => {
+        this.tasks = res.data.tasks;
       })
     }
   }

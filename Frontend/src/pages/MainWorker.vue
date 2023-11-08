@@ -1,7 +1,7 @@
 <script setup>
 import Header from '@/components/Header.vue'
 import Task from '@/components/Task.vue'
-import Navbar from '@/components/Navbar.vue';
+import NavbarEmployee from '@/components/NavbarEmployee.vue';
 import {ref, onMounted} from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
 import TasksDependsTab from '@/components/TasksDependsTab.vue';
@@ -17,12 +17,10 @@ onMounted(() => {
 <template>
   <Header></Header>
   <div class="main-header">
-    <div class="main-header__tasks">
-      Мои задачи
-    </div>
+    Мои задачи
   </div>
   <div class="container">
-    <Navbar class="navbar"/>
+    <NavbarEmployee class="navbar"/>
     <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
         <TasksDependsTab
           :tasks="tasksStore.currentTasks"
@@ -64,10 +62,15 @@ onMounted(() => {
     background-position-y: 70%
   }
   .container {
+    min-height: 80vh;
     display: grid;
     grid-template-columns: 2fr 10fr;
-    grid-template-rows: 100%;
-    grid-template-areas: "navbar tasks";
+    grid-template-rows: 99% 1%;
+    grid-template-areas: "navbar tasks" "navbar navigation";
+  } 
+
+  .navigation {
+    grid-area: 'navigation';
   }
 
   .navbar {

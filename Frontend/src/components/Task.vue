@@ -36,7 +36,7 @@ import StatusButton from '@/components/StatusButton.vue';
         <div class="task__date">
             {{ task.date_of_pont }}
         </div>
-        <ButtonUI class="task__button">Начать</ButtonUI>
+        <ButtonUI @click="openPopupInfo" class="task__button">Начать</ButtonUI>
     </div>
 </template>
 
