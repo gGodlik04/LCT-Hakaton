@@ -93,6 +93,7 @@ export const useTasksStore = defineStore('tasksStore', {
       }).then((response) => {
         window.localStorage.setItem('token', response.data.auth_token)
       }).then(async () => {
+        console.log(this.tokenLocalStorage);
         const resRole = await axios.get('/api/accounts/users/me/', {
           headers: {
             Authorization: `Token ${this.tokenLocalStorage}`

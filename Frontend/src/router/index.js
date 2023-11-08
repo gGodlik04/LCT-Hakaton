@@ -31,16 +31,16 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const tasksStore = useTasksStore();
-
-  if (tasksStore.tokenLocalStorage && (tasksStore.roleLocalStorage == 2)) {
-    next('/')
+router.beforeEach( async(to, from) => {
+  const tasksStore = await useTasksStore();
+  console.log(!tasksStore.tokenLocalStorage);
+  if (!tasksStore.tokenLocalStorage && to.name !== 'login') {
+    return { name: 'login' }
+  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 2 && to.name !== 'mainWorker') {
+    return { name: 'mainWorker' }
+  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 3 && to.name !== 'MainManager') {
+    return { name: 'MainManager' }
   }
-
-  // if (tasksStore.tokenLocalStorage && (tasksStore.roleLocalStorage == 1)) {
-  //   next({ name: 'MainManager' })
-  // }
 })
 
 export default router
