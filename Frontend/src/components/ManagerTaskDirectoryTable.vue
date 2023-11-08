@@ -10,20 +10,19 @@
 </script>
 
 <template>
-    <div class="table-points">
+    <div class="table-tasks">
         <table>
             <thead>
-                <th>№ точки</th>
-                <th>Адрес точки</th>
-                <th>Когда подключена точка?</th>
-                <th>Карты и материалы доставлены?</th>
-                <th>Кол-во дней после выдачи последней карты</th>
-                <th>Кол-во одобренных заявок</th>
-                <th>Кол-во выданных карт</th>
+                <th>Тип</th>
+                <th>Название задачи</th>
+                <th>Приоритет</th>
+                <th>Время выполнения</th>
+                <th>Условие назначения</th>
+                <th>Требуемый уровень сотрудника</th>
             </thead>
             <tbody>
-                <tr v-for="(point) in dataTable" :key="point.id_point">
-                    <td v-for="(value) in point" :key="id_point">
+                <tr v-for="(taskType) in dataTable" :key="taskType.type">
+                    <td v-for="(value) in taskType" :key="type">
                         {{ value }}
                     </td>
                 </tr>
@@ -33,7 +32,7 @@
 </template>
 
 <style scoped>
-    .table-points {
+    .table-tasks {
         font-size: 14px;
         height: 100%;
         font-family: 'MontseratReg';

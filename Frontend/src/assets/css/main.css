@@ -1,24 +1,58 @@
 @font-face {
   font-family: "Montserat";
-  src: local("Montserat-bold"), url("@/fonts/Montserrat-Bold.ttf") format("truetype");
+  src: url("@/fonts/Montserrat-Bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "MontseratReg";
-  src: local("Montserat-reg"), url("@/fonts/Montserrat-Regular.ttf") format("truetype");
+  src: url("@/fonts/Montserrat-Regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "MontseratMed";
-  src: local("Montserat-med"), url("@/fonts/Montserrat-Medium.ttf") format("truetype");
+  src: url("@/fonts/Montserrat-Medium.ttf") format("truetype");
 }
+.theme-light {
+  --color-primary: #ECECEC;
+  --color-secondary: #313131;
+  --color-accent: #FFFFFF;
+  --color-header: #213A8B;
+  --font-color: #000000;
+  --font-color-inactive: #909090;
+  --button-color: #DA5155;
+  --input-color: #F1F1F1;
+  --input-color-text: #000;
+}
+.theme-light body {
+  background-image: url("../images/SovcomBankLogoLight.png");
+}
+.theme-light .login {
+  border: 0px;
+  box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.25);
+}
+
+.theme-dark {
+  --color-primary: #00091F;
+  --color-secondary: #FFFFFF;
+  --color-accent: rgba(0, 9, 31, 0.8);
+  --color-header: rgba(0, 9, 31, 0);
+  --font-color: #ffffff;
+  --button-color: #AA1418;
+  --input-color: rgba(0, 9, 31, 0.7);
+  --input-color-text: #FFFFFF;
+  --font-color-inactive: #FFFFFF;
+}
+.theme-dark .login__form-auth_input {
+  border: 0.5px solid #FFFFFF;
+}
+
 body {
   margin: 0;
   width: 100vw;
   height: 100vh;
   padding: 0;
   box-sizing: border-box;
-  background-color: #00091F;
+  background-color: var(--color-primary);
   font-family: "Montserat";
-  background-image: url("../images/SovcomBankLogo.png");
+  background-image: url("../images/SovcomBankLogoDark.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

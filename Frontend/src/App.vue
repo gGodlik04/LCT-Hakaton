@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import { useTasksStore } from '@/stores/TasksStore';
-
+import { onMounted } from 'vue';
 
 const tasksStore = useTasksStore();
 </script>

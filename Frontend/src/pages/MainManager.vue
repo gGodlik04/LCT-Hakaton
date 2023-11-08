@@ -3,7 +3,8 @@ import NavbarManager from '../components/NavbarManager.vue';
 import { useManagerStore } from '../stores/ManagerStore';
 import Header from '@/components/Header.vue'
 import ManagerPointsTable from '@/components/ManagerPointsTable.vue'
-import ManagerTaskDirectory from '@/components/ManagerTaskDirectory.vue'
+import ManagerTaskDirectoryTable from '@/components/ManagerTaskDirectoryTable.vue'
+import ManagerEmployeesTable from '@/components/ManagerEmployeesTable.vue'
 
 
 const managerStore = useManagerStore();
@@ -33,14 +34,19 @@ const managerStore = useManagerStore();
         />
     </div>
     <div class="content-main" v-if="managerStore.activeTab == 2">
-        <ManagerTaskDirectory
+        <ManagerTaskDirectoryTable
             :dataTable="managerStore.getDataTasks"
+        />
+    </div>
+    <div class="content-main" v-if="managerStore.activeTab == 3">
+        <ManagerEmployeesTable
+            :dataTable="managerStore.getDataEmployees"
         />
     </div>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 .container-wrapper {
     display: grid;

@@ -15,7 +15,7 @@ const changeTab = (id) => {
 </script>
 
 <template>
-    <div class="navbar">
+    <div class="navbar-manager">
         <div 
             @click="changeTab(1)" 
             class="navbar__points" 
@@ -48,16 +48,6 @@ const changeTab = (id) => {
 </template>
 
 <style scoped>
-.navbar {
-    color: #FFFFFF;
-    font-size: 19px;
-    padding: 0 37px 0 37px;
-    display: flex;
-    flex-direction: column;
-    gap: 37px;
-    margin-top: 24px;
-    font-family: 'MontseratReg';
-}
 
 .active {
     color: #AA1418;

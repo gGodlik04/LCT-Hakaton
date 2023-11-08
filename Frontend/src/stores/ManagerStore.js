@@ -173,6 +173,9 @@ export const useManagerStore = defineStore('managerStore', {
     getDataTasks() {
       return this.taskDirectory
     },
+    getDataEmployees() {
+      return this.employees
+    },
     tokenLocalStorage() {
       return window.localStorage.getItem('token', JSON.stringify())
     },

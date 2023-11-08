@@ -16,7 +16,7 @@ export default {
         min-width: 40%;
         color: #ffffff;
         padding: 0.5em;
-        background-color: #AA1418;
+        background-color: var(--button-color);
         border-radius: 10px;
         font-size: 24px;
     }

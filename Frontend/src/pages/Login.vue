@@ -35,7 +35,7 @@ const loginFormSubmit = () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .login-wrapper {
     height: 15vh;
   }
@@ -43,7 +43,7 @@ const loginFormSubmit = () => {
     padding: 43px 75px 43px 75px;
     margin-top: auto;
     margin-bottom: auto;
-    color: #FFFFFF;
+    color: var(--color-secondary);
     margin-left: auto;
     margin-right: auto;
     height: 350px;
@@ -51,12 +51,14 @@ const loginFormSubmit = () => {
     border-radius: 30px;
     width: 15%;
     border: 3px solid #646464;
-    background: rgba(0, 9, 31, 0.8);
+    background: var(--color-accent);
     backdrop-filter: blur(2px);
+    color: var(--font-color-inactive);
   }
   .login__title {
     font-size: 23px;
     text-align: center;
+    color: var(--font-color);
   }
 
   .login__role {
@@ -81,19 +83,20 @@ const loginFormSubmit = () => {
     margin-top: 25px;
     border-radius: 10px;
     border: none;
-    background-color: #D0D0D0;
+    color: var(--input-color-text);
+    background-color: var(--input-color);
     text-align: center;
     font-size: 19px;
   }
   
   .active {
-    color: #AA1418;
+    color: var(--button-color);
   }
   .active:after {
     content: '';
     display: block;
     height: 3px; 
-    background: #AA1418; 
+    background: var(--button-color);
     width: 100%; 
     margin-top: 20px; 
 	  transition: 1s; 
