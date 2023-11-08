@@ -8,3 +8,5 @@ Frontend/Frontend/*
 Backend/static
 Backend/media
 Backend/logs
+DbData/dbfiles
+DbData
