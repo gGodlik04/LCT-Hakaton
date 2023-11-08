@@ -1,9 +1,12 @@
 from .choices import (PointDate,
                       TaskPriority,
-                      GradeChoices
-)
+                      GradeChoices)
+
+from .directories import TaskTypeModel, AgentPointModel
 __all__ = [
     'PointDate',
+    'AgentPointModel',
+    'TaskTypeModel',
     'TaskPriority',
     'GradeChoices'
 ]

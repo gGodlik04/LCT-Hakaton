@@ -7,11 +7,11 @@ from yandex_geocoder import Client
 
 
 class TaskDistributor:
-    def __init__(self, points_file, employees_file, yandex_api_key, openroute_api_key):
-        self.points = pd.read_excel(points_file, sheet_name='Входные данные для анализа', usecols=range(7))
+    def __init__(self, points_file: str, employees_file: str, yandex_api_key: str, openroute_api_key: str):
+        self.points = pd.read_csv(points_file, encoding='windows-1251', sep =';')
         self.points.dropna(inplace=True)
 
-        self.employees = pd.read_excel(employees_file, sheet_name='Справочник сотрудников')
+        self.employees = pd.read_csv(employees_file, encoding='windows-1251', sep=';')
         self.points_tomorrow = {
             key: [] for key in self.points.columns  # Создание датафрейма, с задачами которые не успели сегодня
         }
@@ -168,10 +168,5 @@ class TaskDistributor:
         self.distribute_tasks()
 
         self.points_tomorrow.to_csv('points_tomorrow.csv', index=False)
-        self.employees[['ФИО', "Номера взятых задач"]].to_csv('employees.csv', index=False)
-
-
-if __name__ == "__algoritm__":
-    task_distributor = TaskDistributor('DataSet.xlsx', 'DataSet.xlsx', 'your_yandex_api_key', 'your_openroute_api_key')
-    task_distributor.run_distribution()
+        self.employees[['ФИО', "Номера взятых задач"]].to_csv('tasks.csv', index=False)
 

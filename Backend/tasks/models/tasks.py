@@ -25,7 +25,6 @@ class Task(models.Model):
                                  on_delete=models.DO_NOTHING, null=True)
     
     class Meta:
-
         verbose_name = 'Задачи'
         db_table = "Task"
 
