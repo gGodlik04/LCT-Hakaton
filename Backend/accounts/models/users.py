@@ -1,15 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from .roles import UserRoleChoices
+import uuid
+
+from .roles import UserRoleChoices, GradeChoices
 
 
 class User(AbstractUser):
+
+    uuid = models.UUIDField('UUID', primary_key=True, default=uuid.uuid4, editable=False, null=False)
     role = models.SmallIntegerField(verbose_name='Тип пользователя', choices=UserRoleChoices.choices)
     phone_number = models.CharField(max_length=32, verbose_name='Телефон пользователя')
     middle_name = models.CharField(max_length=100, verbose_name='Отчество')
     email = models.EmailField(max_length=255, verbose_name='Email пользователя', unique=True)
+    grade = models.PositiveSmallIntegerField(verbose_name='Уровень сотрудника', choices=GradeChoices.choices)
+    address = models.CharField(verbose_name='Адрес сотрудника', max_length=255)
 
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'role', 'password', 'username']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'role', 'password', 'username', 'grade', 'address', 'middle_name']
     USERNAME_FIELD = 'email'
 
     class Meta:

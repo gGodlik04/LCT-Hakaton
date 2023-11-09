@@ -1,5 +1,9 @@
-from .status import TaskStatusChoices
+from .status import TaskStatusChoices, TaskPriorityChoices, TaskTypeChoices
+from .tasks import Task
 
 __all__ = [
-    'TaskStatusChoices'
+    'TaskStatusChoices',
+    'TaskPriorityChoices',
+    'TaskTypeChoices',
+    'Task'
 ]

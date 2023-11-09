@@ -3,7 +3,7 @@ from rest_framework import viewsets, mixins, status, views
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from tasks.models.models import Task
+from tasks.models.tasks import Task
 from tasks.serializers import TaskSerializer, CreateTaskSerializer
 
 

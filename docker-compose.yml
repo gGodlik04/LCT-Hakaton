@@ -11,7 +11,8 @@ services:
             PGDATA: /var/lib/postgresql/data/dbfiles
         volumes:
             - ./DbData:/var/lib/postgresql/data
-            - ./postgresql.conf:/etc/postgresql.conf
+           # - postgresql.conf:/etc/postgresql.conf
+            - ./DbData:/docker-entrypoint-initdb.d/
         container_name: pgdb
 
 
@@ -42,3 +43,4 @@ services:
         volumes:
             - /app/node_modules
             - ./Frontend:/app
+
