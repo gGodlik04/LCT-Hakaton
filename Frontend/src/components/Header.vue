@@ -75,7 +75,7 @@ function toggleTheme() {
         border-bottom-right-radius: 20px;
     }
 
-    .header__logo {
+    .header__gps-navbar_logo {
         position: relative;
         left: 140px;
     }
@@ -100,7 +100,7 @@ function toggleTheme() {
     }
 
     .header__gps-navbar_navbar {
-        margin-right: 10px;
+        margin-right: 20px;
         display: none;
     }
 
@@ -192,7 +192,12 @@ function toggleTheme() {
         }
 
         .header__auth {
-        display: none;
-    }
+            display: none;
+        }
+
+        .header__gps-navbar_logo {
+            position: relative;
+            left: 0px;
+        }
     }
 </style>

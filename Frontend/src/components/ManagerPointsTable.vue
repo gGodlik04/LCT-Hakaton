@@ -48,16 +48,21 @@
         padding: 20px;
         height: 20px;
         text-align: center;
+        min-width: 100px;
     }
 
     table {
+        // table-layout: fixed;
+        // width: 100%;
+        border-collapse: collapse;
+        overflow: auto;
         table-layout: fixed;
-        width: 100%;
     }
 
     @media (max-width: $screen-md) {
         .table-points {
             overflow-y: scroll;
+            margin-left: 37px;
         }
     }
 </style>

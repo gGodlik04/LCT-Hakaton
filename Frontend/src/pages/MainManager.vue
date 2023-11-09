@@ -97,6 +97,7 @@ const managerStore = useManagerStore();
 }
 
 .main-header__buttons-upload-file {
+    display: flex;
     background-color: #FFFFFF;
     color: #000;
 }
@@ -109,16 +110,52 @@ const managerStore = useManagerStore();
     padding-left: 30px;
   }
 
-
-@media (max-width: $screen-sm) {
+@media (max-width: $screen-md) {
+    .main-header {
+        flex-wrap: wrap;
+    }
+    
+    
+    .main-header__buttons {
+        min-width: 5%;
+        font-size: 1px;
+    }
     .navbar-manager {
         display: none;
     }
-}
-
-@media (max-width: $screen-md) {
     .container-wrapper {
+        display: block;
     }
 }
 
+
+@media (max-width: $screen-sm) {
+    .main-header__title {
+        font-size: 26px;
+    }
+
+    .main-header__button {
+        padding: 10px 15px !important;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: $screen-small) {
+    .main-header__button {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        border-radius: 5px;
+        width: 90%;
+        min-width: 0;
+    }
+    .main-header__buttons {
+        display: block;
+        margin-top: 10px;
+    }
+    .main-header {
+        display: block;
+        justify-content: center;
+    }
+}
 </style>
