@@ -47,7 +47,7 @@ const changeTab = (id) => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 .active {
     color: #AA1418;

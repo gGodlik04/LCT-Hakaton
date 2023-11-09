@@ -2,6 +2,7 @@
 import Logo from '@/components/icons/Logo.vue'
 import Profile from '@/components/icons/Profile.vue'
 import Gps from '@/components/icons/Gps.vue'
+import NavbarIcon from '@/components/icons/NavbarIcon.vue'
 import { onMounted, computed, ref} from 'vue';
 
 function setTheme(themeName) {
@@ -35,12 +36,14 @@ function toggleTheme() {
 
 <template>
     <div class="header">
-        <div class="header__gps">
+        <div class="header__gps-navbar">
+            <NavbarIcon class="header__gps-navbar_navbar"/>
             <Gps
+                class="header__gps-navbar_gps"
                 :theme="flagTheme"
             />
         </div>
-        <div class="header__logo">
+        <div class="header__gps-navbar_logo">
             <Logo
                 :theme="flagTheme"
             />
@@ -76,6 +79,10 @@ function toggleTheme() {
         position: relative;
         left: 140px;
     }
+
+    .header__gps-navbar {
+        display: flex;
+    }
     
     .header__auth_employee {
         font-size: 20px;
@@ -90,6 +97,16 @@ function toggleTheme() {
         position: relative;
         bottom: 1px;
         margin-left: 28px;
+    }
+
+    .header__gps-navbar_navbar {
+        margin-right: 10px;
+        display: none;
+    }
+
+    .header__gps-navbar_gps {
+        position: relative;
+        bottom: 5px;
     }
 
     .change-theme {
@@ -167,5 +184,15 @@ function toggleTheme() {
 
     .slider.round:before {
     border-radius: 50%;
+    }
+
+    @media (max-width: $screen-sm) {
+        .header__gps-navbar_navbar {
+            display: block;
+        }
+
+        .header__auth {
+        display: none;
+    }
     }
 </style>

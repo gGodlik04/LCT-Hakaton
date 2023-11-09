@@ -5,6 +5,7 @@ import Header from '@/components/Header.vue'
 import ManagerPointsTable from '@/components/ManagerPointsTable.vue'
 import ManagerTaskDirectoryTable from '@/components/ManagerTaskDirectoryTable.vue'
 import ManagerEmployeesTable from '@/components/ManagerEmployeesTable.vue'
+import InfoPanelManager from '../components/InfoPanelManager.vue';
 
 
 const managerStore = useManagerStore();
@@ -42,6 +43,9 @@ const managerStore = useManagerStore();
         <ManagerEmployeesTable
             :dataTable="managerStore.getDataEmployees"
         />
+    </div>
+    <div class="content-main" v-if="managerStore.activeTab == 4">
+        <InfoPanelManager/>
     </div>
   </div>
 </template>
@@ -104,4 +108,17 @@ const managerStore = useManagerStore();
     content: "\25CF";
     padding-left: 30px;
   }
+
+
+@media (max-width: $screen-sm) {
+    .navbar-manager {
+        display: none;
+    }
+}
+
+@media (max-width: $screen-md) {
+    .container-wrapper {
+    }
+}
+
 </style>

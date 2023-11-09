@@ -32,7 +32,7 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .table-points {
         font-size: 14px;
         height: 100%;
@@ -48,5 +48,16 @@
         padding: 20px;
         height: 20px;
         text-align: center;
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    @media (max-width: $screen-md) {
+        .table-points {
+            overflow-y: scroll;
+        }
     }
 </style>
