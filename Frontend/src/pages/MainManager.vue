@@ -111,6 +111,10 @@ const managerStore = useManagerStore();
   }
 
 @media (max-width: $screen-md) {
+
+    html {
+        height: 100;
+    }
     .main-header {
         flex-wrap: wrap;
     }
@@ -121,7 +125,15 @@ const managerStore = useManagerStore();
         font-size: 1px;
     }
     .navbar-manager {
-        display: none;
+        position: absolute;
+        margin-top: 0;
+        top: 0;
+        z-index: 999;
+        height: 100vh;
+        width: 100vw;
+        background: var(--color-accent-mobile);
+        backdrop-filter: blur(20px);
+        // display: none;
     }
     .container-wrapper {
         display: block;

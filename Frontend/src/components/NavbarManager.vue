@@ -56,4 +56,10 @@ const changeTab = (id) => {
     content: "\25CF";
     padding-left: 30px;
   }
+
+  @media (max-width: $screen-md) { 
+      .navbar-manager:first-child {
+        padding-top: 75px;
+      }
+  }
 </style>

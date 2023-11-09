@@ -5,6 +5,10 @@ import Gps from '@/components/icons/Gps.vue'
 import NavbarIcon from '@/components/icons/NavbarIcon.vue'
 import { onMounted, computed, ref} from 'vue';
 
+const openNavbar = () => {
+    
+}
+
 function setTheme(themeName) {
   localStorage.setItem('theme', themeName);
   document.documentElement.className = themeName;
@@ -37,7 +41,7 @@ function toggleTheme() {
 <template>
     <div class="header">
         <div class="header__gps-navbar">
-            <NavbarIcon class="header__gps-navbar_navbar"/>
+            <NavbarIcon @click="openNavbar" class="header__gps-navbar_navbar"/>
             <Gps
                 class="header__gps-navbar_gps"
                 :theme="flagTheme"

@@ -57,7 +57,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   body {
     background-position-y: 70%
   }
