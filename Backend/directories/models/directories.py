@@ -12,9 +12,9 @@ class AgentPointModel(models.Model):
     last_card_given = models.DateField('Дата последней выдачи карты', null=True)
     num_given_cards = models.SmallIntegerField('Выданные карты',)
     approved_requests = models.SmallIntegerField('Одобренные заявки',)
-    last_deliver = models.DateField('Последняя доставка материала',)
-    last_teaching = models.DateField('Последнее проведение обуччения',)
-    last_stimulation = models.DateField('Последняя стимуляция выдач',)
+    last_deliver = models.DateField('Последняя доставка материала', null=True)
+    last_teaching = models.DateField('Последнее проведение обуччения', null=True)
+    last_stimulation = models.DateField('Последняя стимуляция выдач', null=True)
 
     class Meta:
         db_table = "AgentPoint"

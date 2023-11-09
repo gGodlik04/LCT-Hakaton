@@ -8,7 +8,7 @@ from yandex_geocoder import Client
 
 class TaskDistributor:
     def __init__(self, points_file: str, employees_file: str, yandex_api_key: str, openroute_api_key: str):
-        self.points = pd.read_csv(points_file, encoding='windows-1251', sep =';')
+        self.points = pd.read_csv(points_file, encoding='windows-1251', sep=';')
         self.points.dropna(inplace=True)
 
         self.employees = pd.read_csv(employees_file, encoding='windows-1251', sep=';')

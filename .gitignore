@@ -1,5 +1,5 @@
 env
-.env
+Backend/.env
 venv
 *.log
 Frontend/env/
@@ -9,4 +9,3 @@ Backend/static
 Backend/media
 Backend/logs
 DbData/dbfiles
-DbData
