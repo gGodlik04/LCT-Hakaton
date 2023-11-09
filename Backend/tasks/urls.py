@@ -8,5 +8,5 @@ router.register('task', TaskViewSet, basename='task')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('', MixTasksAPIView.as_view(), name='send tasks to workers')
+
 ]

@@ -16,7 +16,7 @@ class Task(models.Model):
 
     uuid = models.UUIDField('UUID', primary_key=True, default=uuid.uuid4, editable=False)
     appointment_date = models.DateField('Время начала задачи', null=True,)
-    priority = models.PositiveSmallIntegerField('Приоритет', choices=TaskPriorityChoices.choices, null=False)
+    priority = models.PositiveSmallIntegerField('Приоритет', choices=TaskPriorityChoices.choices, null=True)
     status = models.PositiveSmallIntegerField('Статус задачи', choices=TaskStatusChoices.choices, default=1)
     comment = models.TextField('Коментарий к задаче', null=True)
     favorite = models.BooleanField('Избранное?', default=False)

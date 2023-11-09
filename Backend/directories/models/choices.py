@@ -2,8 +2,8 @@ from django.db import models
 
 
 class PointDate(models.TextChoices):
-    LONG_TIME = 'long_ago'
-    YESTERDAY = 'yesterday'
+    LONG_TIME = 'давно'
+    YESTERDAY = 'вчера'
 
 
 class TaskPriority(models.IntegerChoices):
