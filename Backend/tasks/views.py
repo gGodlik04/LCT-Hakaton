@@ -7,20 +7,6 @@ from tasks.models.tasks import Task
 from tasks.serializers import TaskSerializer, CreateTaskSerializer
 
 
-class UpdateTaskView():
-    def get(self, request):
-        return Response(status.HTTP_200_OK)
-
-
-class MixTasksAPIView(views.APIView):
-
-    def get(self, request):
-        return Response({'text': 'created'}, status.HTTP_200_OK)
-
-    def post(self,request):
-        pass
-
-
 class TaskViewSet(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
                   mixins.DestroyModelMixin,
