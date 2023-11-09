@@ -7,7 +7,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = [
-            'address', 'priority', 'uuid',
+            'priority', 'uuid', 'agent_point',
             'status', 'appointment_date', 'task_type',
             'employee',  'comment'
         ]
@@ -25,7 +25,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = [
-            'address', 'priority', 'uuid',
+            'priority', 'uuid', 'agent_point',
             'status', 'appointment_date', 'task_type',
             'employee', 'favorite', 'comment'
         ]
