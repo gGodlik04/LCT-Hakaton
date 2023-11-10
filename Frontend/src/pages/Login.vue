@@ -14,7 +14,10 @@ const loginFormSubmit = () => {
   tasksStore.login(email.value, password.value)
 }
 
-
+const setActive = (e) => {  // Функционал входа для разных ролей реализован через один метод API. Выбор роли для дизайна.
+  document.querySelector('.active').classList.remove('active');
+  e.srcElement.classList.add('active');
+}
 </script>
 
 <template>
@@ -23,8 +26,8 @@ const loginFormSubmit = () => {
   <div class="login login-bg">
     <div class="login__title">Добро пожаловать!</div>
     <div class="login__role">
-      <div class="login__role_manager active">Менеджер</div>
-      <div class="login__role_worker">Сотрудник</div>
+      <div class="login__role_manager active" @click="setActive">Менеджер</div>
+      <div class="login__role_worker" @click="setActive">Сотрудник</div>
     </div>
     <div class="login__form"></div>
       <form class="login__form-auth">
