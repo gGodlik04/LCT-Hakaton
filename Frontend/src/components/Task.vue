@@ -42,8 +42,8 @@ import StatusButton from '@/components/StatusButton.vue';
 
 <style scoped>
     .task {
-        height: 18em;
-        width: 23em;
+        height: 17em;
+        width: 22em;
         color: var(--font-color);
         padding: 26px 30px;
         border-radius: 20px;

@@ -51,15 +51,19 @@ const changeTab = (id) => {
 
 .active {
     color: #AA1418;
-  }
+}
 .active::after {
     content: "\25CF";
     padding-left: 30px;
-  }
+}
 
-  @media (max-width: $screen-md) { 
-      .navbar-manager:first-child {
+.navbar-manager {
+    color: var(--font-color) !important;
+}
+
+@media (max-width: $screen-md) { 
+    .navbar-manager:first-child {
         padding-top: 75px;
-      }
-  }
+    }
+}
 </style>

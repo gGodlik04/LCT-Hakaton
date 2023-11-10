@@ -51,7 +51,6 @@ const managerStore = useManagerStore();
 </template>
 
 <style scoped lang="scss">
-
 .container-wrapper {
     display: grid;
     grid-template-columns: 2fr 10fr;
@@ -79,6 +78,7 @@ const managerStore = useManagerStore();
     margin: 0 37px;
     justify-content: space-between;
     color: #FFFFFF;
+    color: var(--font-color);
 }
 
 .main-header__title {
@@ -111,10 +111,6 @@ const managerStore = useManagerStore();
   }
 
 @media (max-width: $screen-md) {
-
-    html {
-        height: 100;
-    }
     .main-header {
         flex-wrap: wrap;
     }
@@ -130,10 +126,10 @@ const managerStore = useManagerStore();
         top: 0;
         z-index: 999;
         height: 100vh;
-        width: 100vw;
+        width: fit-content;
         background: var(--color-accent-mobile);
         backdrop-filter: blur(20px);
-        // display: none;
+        display: none;
     }
     .container-wrapper {
         display: block;
@@ -153,6 +149,9 @@ const managerStore = useManagerStore();
 }
 
 @media (max-width: $screen-small) {
+    .navbar-manager {
+        width: 100%;
+    }
     .main-header__button {
         display: block;
         margin-top: 10px;

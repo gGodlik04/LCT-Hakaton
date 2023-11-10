@@ -18,14 +18,15 @@ const flagTheme = ref('theme-dark')
 
 onMounted(() => {
   () => {
-      if (localStorage.getItem('theme') === 'theme-light') {
-          setTheme('theme-light');
-          document.getElementById('slider').checked = true;
-      } else {
-          setTheme('theme-dark');
-        document.getElementById('slider').checked = false;
-      }
-  };
+        localStorage.setItem('theme', 'theme-dark');
+        if (localStorage.getItem('theme') === 'theme-light') {
+            setTheme('theme-light');
+            document.getElementById('slider').checked = true;
+        } else {
+            setTheme('theme-dark');
+            document.getElementById('slider').checked = false;
+        }
+    };
 })
 
 function toggleTheme() {
@@ -81,6 +82,7 @@ function toggleTheme() {
 
     .header__gps-navbar_logo {
         position: relative;
+        bottom: 4px;
         left: 140px;
     }
 
@@ -202,6 +204,12 @@ function toggleTheme() {
         .header__gps-navbar_logo {
             position: relative;
             left: 0px;
+        }
+    }
+
+    @media (max-width: $screen-small) {
+        .header__gps-navbar_gps {
+            display: none;
         }
     }
 </style>

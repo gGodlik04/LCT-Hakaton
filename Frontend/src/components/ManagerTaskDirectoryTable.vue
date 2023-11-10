@@ -36,8 +36,8 @@
         font-size: 14px;
         height: 100%;
         font-family: 'MontseratReg';
-        color: #FFFFFF;
-        background: rgba(0, 9, 31, 0.8);
+        color: var(--font-color);
+        background: var(--color-accent);
         backdrop-filter: blur(2px);
         margin-top: 24px;
         margin-right: 37px;

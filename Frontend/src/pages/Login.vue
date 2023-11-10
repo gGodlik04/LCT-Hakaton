@@ -113,4 +113,11 @@ const loginFormSubmit = () => {
   .login__from-auth_submit-buttonUI:hover {
     scale: 1;
   }
+
+  .theme-light {
+    .login {
+      border: 0px; 
+      box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.25);
+    }
+  }
 </style>
