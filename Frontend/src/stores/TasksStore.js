@@ -63,6 +63,7 @@ export const useTasksStore = defineStore('tasksStore', {
         about: 'Более подробная информация3333',
       },
     ],
+    employeeInfo:[],
     activeTab: 1,
   }),
   getters: {
@@ -83,6 +84,9 @@ export const useTasksStore = defineStore('tasksStore', {
     },
     roleLocalStorage() {
       return window.localStorage.getItem('role', JSON.stringify())
+    },
+    getEmployeeInfo() {
+      return JSON.parse(window.localStorage.getItem("employeeInfo"))
     }
   },
   actions: {
@@ -98,22 +102,21 @@ export const useTasksStore = defineStore('tasksStore', {
           password: `${password}`,
           email: `${email}`
         })
-        window.localStorage.setItem('token', `Token ${resToken.data.auth_token}`)
+        await window.localStorage.setItem('token', `Token ${resToken.data.auth_token}`)
         const resRole = await axios.get('/api/accounts/users/me/', {
           headers: {
             Authorization: `Token ${resToken.data.auth_token}`
           }
         })
-        window.localStorage.setItem('role', resRole.data.role)
-
-        globalStore.setToken(`Token ${resToken.data.auth_token}`)
-        globalStore.setRole(resRole.data.role)
-
-        router.push({ path: '/' })
+        await window.localStorage.setItem('role', resRole.data.role)
+        localStorage.setItem("employeeInfo",JSON.stringify(resRole.data));
         
         globalStore.toggleLoading()
       } catch (error) {
         globalStore.toggleLoading()
+      }
+      finally {
+        location.reload()
       }
     },
 

@@ -1,6 +1,7 @@
 <script setup>
 import Priority from '@/components/Priority.vue';
 import StatusButton from '@/components/StatusButton.vue';
+import { useGlobalStore } from '../stores/GlobalStore';
 
     const props = defineProps({
         task: {
@@ -9,6 +10,8 @@ import StatusButton from '@/components/StatusButton.vue';
             default: () => {}
         },
     })
+
+    const globalStore = useGlobalStore();
 </script>
 
 <template>

@@ -3,7 +3,11 @@ import { RouterLink, RouterView } from 'vue-router';
 import { useTasksStore } from '@/stores/TasksStore';
 import { onMounted } from 'vue';
 import { useGlobalStore } from '@/stores/GlobalStore';
+import router from '@/router';
 
+onMounted(() => {
+  router.push({ path: '/' })
+})
 
 const globalStore = useGlobalStore();
 

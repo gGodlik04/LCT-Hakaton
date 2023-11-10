@@ -16,12 +16,6 @@ export const useGlobalStore = defineStore('globalStore', {
     isLoading() {
       return this.loading
     },
-    getRole() {
-      return this.role
-    },
-    getToken() {
-      return this.token
-    }
   },
   actions: {
     toggleNavbar() {
@@ -30,11 +24,5 @@ export const useGlobalStore = defineStore('globalStore', {
     toggleLoading() {
       this.loading = !this.loading
     },
-    setRole(role) {
-      this.role = role
-    },
-    setToken(token) {
-      this.token = token
-    }
   }
 });

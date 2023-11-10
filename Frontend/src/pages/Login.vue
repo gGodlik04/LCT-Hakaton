@@ -44,13 +44,13 @@ const setActive = (e) => {  // Функционал входа для разны
           type="text" 
           autofocus 
           placeholder="Введите email" 
-          autocomplete="on"
-        >
-        <input 
+          >
+          <input 
           class="login__form-auth_input" 
           v-model="password" 
           type="password" 
           placeholder="Введите пороль"
+          autocomplete="on"
         >
         <ButtonUI @click="loginFormSubmit" class="login__from-auth_submit-buttonUI">Войти</ButtonUI>
       </form>
