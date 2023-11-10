@@ -10,6 +10,10 @@ const globalStore = useGlobalStore();
 const managerStore = useManagerStore();
 const {activeTab} = storeToRefs(managerStore)
 
+const changeTab = (id) => {
+    managerStore.setActiveTab(id)
+}
+
 </script>
 
 <template>

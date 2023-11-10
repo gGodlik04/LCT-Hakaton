@@ -37,7 +37,7 @@ router.beforeEach( async(to, from) => {
     return { name: 'login' }
   } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 2 && to.name !== 'mainWorker') {
     return { name: 'mainWorker' }
-  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 3 && to.name !== 'MainManager') {
+  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 1 && to.name !== 'MainManager') {
     return { name: 'MainManager' }
   }
 })

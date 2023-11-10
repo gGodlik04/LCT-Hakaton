@@ -1,6 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { useTasksStore } from './TasksStore';
+import { useGlobalStore } from './GlobalStore';
 
 export const useManagerStore = defineStore('managerStore', {
   state: () => ({
@@ -164,6 +166,7 @@ export const useManagerStore = defineStore('managerStore', {
         grade: 'Джун'
       },
     ],
+    points: [],
     activeTab: 1,
   }),
   getters: {
@@ -181,11 +184,33 @@ export const useManagerStore = defineStore('managerStore', {
     },
     roleLocalStorage() {
       return window.localStorage.getItem('role', JSON.stringify())
+    },
+    allPointsLocalStorage() {
+      return JSON.parse(window.localStorage.getItem('allPoints'))
     }
   },
   actions: {
     setActiveTab(id) {
       this.activeTab = id
     },
+
+    async getAllPoints(page, limit) {
+      const globalStore = useGlobalStore()
+      try {
+        const tasksStore = useTasksStore()
+        globalStore.toggleLoading()
+        const resPoints = await axios.get(`/api/directories/agent_points/?${page}`, {
+          headers: {
+            Authorization: tasksStore.tokenLocalStorage
+          }
+        })
+        this.points = resPoints.data.results
+        localStorage.setItem("allPoints",JSON.stringify(resPoints.data.results));
+        globalStore.toggleLoading()
+      } catch (error) {
+        globalStore.toggleLoading()
+        console.log(error);
+      }
+    }
   }
 });
