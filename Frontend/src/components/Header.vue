@@ -9,7 +9,7 @@ const openNavbar = () => {
     
 }
 
-function setTheme(themeName) {
+const setTheme = (themeName) => {
   localStorage.setItem('theme', themeName);
   document.documentElement.className = themeName;
 }
@@ -29,7 +29,11 @@ onMounted(() => {
     };
 })
 
-function toggleTheme() {
+const isLoginPage = computed(() => {
+    return (window.location.pathname == '/login') ? true : false
+})
+
+const toggleTheme = () => {
   if (localStorage.getItem('theme') === 'theme-light') {
       setTheme('theme-dark');
   } else {
@@ -37,12 +41,17 @@ function toggleTheme() {
   }
   flagTheme.value = localStorage.getItem('theme');
 }
+
+
 </script>
 
 <template>
     <div class="header">
-        <div class="header__gps-navbar">
-            <NavbarIcon @click="openNavbar" class="header__gps-navbar_navbar"/>
+        <div class="header__gps-navbar" :class="isLoginPage ? 'header__gps-navbar-hidden' : ''">
+            <NavbarIcon 
+                @click="openNavbar" 
+                class="header__gps-navbar_navbar" 
+            />
             <Gps
                 class="header__gps-navbar_gps"
                 :theme="flagTheme"
@@ -71,6 +80,10 @@ function toggleTheme() {
 </template>
 
 <style scoped lang="scss">
+
+    .header {
+        margin-left: auto;
+    }
     .header {
         display: flex;
         justify-content: space-between;
@@ -193,6 +206,12 @@ function toggleTheme() {
     }
 
     @media (max-width: $screen-sm) {
+        .header {
+            justify-content: center;
+        }
+        .header__gps-navbar-hidden {
+            display: none;
+        }
         .header__gps-navbar_navbar {
             display: block;
         }
@@ -204,12 +223,6 @@ function toggleTheme() {
         .header__gps-navbar_logo {
             position: relative;
             left: 0px;
-        }
-    }
-
-    @media (max-width: $screen-small) {
-        .header__gps-navbar_gps {
-            display: none;
         }
     }
 </style>

@@ -18,7 +18,7 @@ const loginFormSubmit = () => {
 </script>
 
 <template>
-  <Header></Header>
+  <Header class="header"></Header>
   <div class="login-wrapper"></div>
   <div class="login login-bg">
     <div class="login__title">Добро пожаловать!</div>
@@ -46,7 +46,7 @@ const loginFormSubmit = () => {
     color: var(--color-secondary);
     margin-left: auto;
     margin-right: auto;
-    height: 350px;
+    height: 23em;
     font-weight: 500;
     border-radius: 30px;
     width: 15%;
@@ -118,6 +118,35 @@ const loginFormSubmit = () => {
     .login {
       border: 0px; 
       box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  @media (max-width: $screen-lg) {
+    .login {
+      width: 20%;
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    .login {
+      width: 30%;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .login {
+      width: 40%;
+    }
+  }
+
+  @media (max-width: $screen-small) {
+    .login {
+      width: 70%;
+      height: 50%;
+      padding: 23px 35px 23px 35px;
+    }
+    .login__title, .login__role, .login__form-auth {
+      font-size: 13px;
     }
   }
 </style>
