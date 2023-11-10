@@ -2,20 +2,22 @@
 import { ref, computed } from 'vue'
 import { useManagerStore } from '@/stores/ManagerStore';
 import { storeToRefs } from 'pinia';
+import { useGlobalStore } from '@/stores/GlobalStore';
+
+
+const globalStore = useGlobalStore();
 
 const managerStore = useManagerStore();
 const {activeTab} = storeToRefs(managerStore)
-
-
-const changeTab = (id) => {
-    managerStore.setActiveTab(id);
-}
-
 
 </script>
 
 <template>
     <div class="navbar-manager">
+        <Close 
+            class="navbar-manager-close"
+            @click="globalStore.toggleNavbar()"
+            />
         <div 
             @click="changeTab(1)" 
             class="navbar__points" 
@@ -56,13 +58,21 @@ const changeTab = (id) => {
     content: "\25CF";
     padding-left: 30px;
 }
+.navbar-manager-close {
+    display: none;
+}
 
 .navbar-manager {
     color: var(--font-color) !important;
 }
 
 @media (max-width: $screen-md) { 
-    .navbar-manager:first-child {
+    .navbar-manager-close {
+        display: block;
+        align-self: end;
+        margin-top: 20px;
+    }
+    .navbar-manager:nth-child(2n){
         padding-top: 75px;
     }
 }

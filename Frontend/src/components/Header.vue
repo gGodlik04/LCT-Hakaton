@@ -3,12 +3,10 @@ import Logo from '@/components/icons/Logo.vue'
 import Profile from '@/components/icons/Profile.vue'
 import Gps from '@/components/icons/Gps.vue'
 import NavbarIcon from '@/components/icons/NavbarIcon.vue'
+import { useGlobalStore } from '@/stores/GlobalStore';
 import { onMounted, computed, ref} from 'vue';
 
-
-const openNavbar = () => {
-    
-}
+const globalStore = useGlobalStore();
 
 const setTheme = (themeName) => {
   localStorage.setItem('theme', themeName);
@@ -41,14 +39,17 @@ const toggleTheme = () => {
   flagTheme.value = localStorage.getItem('theme');
 }
 
-
 </script>
 
 <template>
     <div class="header" :class="isLoginPage ? 'header-login' : ''">
-        <div class="header__gps-navbar" :class="isLoginPage ? 'header__gps-navbar-hidden' : ''">
+        <div 
+            class="header__gps-navbar" 
+            :class="isLoginPage ? 'header__gps-navbar-hidden' : ''"
+            @click="openNavbarMobile"
+        >
             <NavbarIcon 
-                @click="openNavbar" 
+                @click="globalStore.toggleNavbar" 
                 class="header__gps-navbar_navbar" 
             />
             <Gps

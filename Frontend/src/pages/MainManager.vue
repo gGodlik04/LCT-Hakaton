@@ -1,13 +1,14 @@
 <script setup>
-import NavbarManager from '../components/NavbarManager.vue';
-import { useManagerStore } from '../stores/ManagerStore';
+import NavbarManager from '@/components/NavbarManager.vue';
+import { useManagerStore } from '@/stores/ManagerStore';
 import Header from '@/components/Header.vue'
 import ManagerPointsTable from '@/components/ManagerPointsTable.vue'
 import ManagerTaskDirectoryTable from '@/components/ManagerTaskDirectoryTable.vue'
 import ManagerEmployeesTable from '@/components/ManagerEmployeesTable.vue'
-import InfoPanelManager from '../components/InfoPanelManager.vue';
+import InfoPanelManager from '@/components/InfoPanelManager.vue';
+import { useGlobalStore } from '@/stores/GlobalStore';
 
-
+const globalStore = useGlobalStore();
 const managerStore = useManagerStore();
 
 </script>
@@ -28,7 +29,10 @@ const managerStore = useManagerStore();
     </div>
 </div>
 <div class="container-wrapper">
-    <NavbarManager class="navbar"/>
+    <NavbarManager 
+        class="navbar"
+        :class="globalStore.getFlagNavbar ? 'active-navbar' : 'inactive-navbar'"
+    />
     <div class="content-main" v-if="managerStore.activeTab == 1">
         <ManagerPointsTable
             :dataTable="managerStore.getDataPoints"
@@ -114,8 +118,13 @@ const managerStore = useManagerStore();
     .main-header {
         flex-wrap: wrap;
     }
-    
-    
+    .active-navbar {
+        display: flex;
+    }
+
+    .inactive-navbar {
+        display: none;
+    }
     .main-header__buttons {
         min-width: 5%;
         font-size: 1px;
@@ -129,7 +138,6 @@ const managerStore = useManagerStore();
         width: fit-content;
         background: var(--color-accent-mobile);
         backdrop-filter: blur(20px);
-        display: none;
     }
     .container-wrapper {
         display: block;

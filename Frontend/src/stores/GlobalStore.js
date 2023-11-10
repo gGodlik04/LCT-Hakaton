@@ -4,28 +4,19 @@ import axios from 'axios'
 
 export const useGlobalStore = defineStore('globalStore', {
   state: () => ({
-    
+    flagNavbar: false,
   }),
   getters: {
-    getDataPoints() {
-      return this.dataTable
+    getFlagNavbar() {
+      return this.flagNavbar
     },
-    getDataTasks() {
-      return this.taskDirectory
-    },
-    getDataEmployees() {
-      return this.employees
-    },
-    tokenLocalStorage() {
-      return window.localStorage.getItem('token', JSON.stringify())
-    },
-    roleLocalStorage() {
-      return window.localStorage.getItem('role', JSON.stringify())
-    }
   },
   actions: {
-    setActiveTab(id) {
-      this.activeTab = id
+    setFlagNavbar(flag) {
+      this.flagNavbar = flag
     },
+    toggleNavbar() {
+      this.flagNavbar = !this.flagNavbar
+    }
   }
 });

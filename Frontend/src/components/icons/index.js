@@ -4,6 +4,7 @@ import LowPriority from '@/components/icons/LowPriority.vue'
 import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 import ArrowRight from '@/components/icons/ArrowRight.vue'
 import UploadFile from '@/components/icons/UploadFile.vue'
+import Close from '@/components/icons/Close.vue'
 
 export default [
     HighPriority,
@@ -12,4 +13,5 @@ export default [
     ArrowLeft,
     ArrowRight,
     UploadFile,
+    Close,
 ]
