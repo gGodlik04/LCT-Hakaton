@@ -1,7 +1,7 @@
 from .users import User
-from .roles import UserRoleChoices
+from .roles import UserRoleChoices, GradeChoices
 
 __all__ = [
-    'User', 'UserRoleChoices',
+    'User', 'UserRoleChoices', 'GradeChoices'
 ]
 

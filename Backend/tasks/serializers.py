@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from tasks.models import Task
+from tasks.models.tasks import Task
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
@@ -7,9 +7,9 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = [
-            'agent_point_date', 'work_time', 'task_type',
-            'materials', 'last_card_given', 'num_given_cards',
-            'approved_requests', 'priority', 'address', 'status', 'employee'
+            'priority', 'uuid', 'agent_point',
+            'status', 'appointment_date', 'task_type',
+            'employee',  'comment'
         ]
 
         def create(self, validated_data):
@@ -25,6 +25,9 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = [
-            'address', 'work_time', 'priority', 'uuid',
-            'status', 'appointment_date', 'task_type'
+            'priority', 'uuid', 'agent_point',
+            'status', 'appointment_date', 'task_type',
+            'employee', 'favorite', 'comment'
         ]
+
+
