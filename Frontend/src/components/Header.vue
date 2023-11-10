@@ -5,6 +5,7 @@ import Gps from '@/components/icons/Gps.vue'
 import NavbarIcon from '@/components/icons/NavbarIcon.vue'
 import { onMounted, computed, ref} from 'vue';
 
+
 const openNavbar = () => {
     
 }
@@ -17,16 +18,14 @@ const setTheme = (themeName) => {
 const flagTheme = ref('theme-dark')
 
 onMounted(() => {
-  () => {
-        localStorage.setItem('theme', 'theme-dark');
-        if (localStorage.getItem('theme') === 'theme-light') {
-            setTheme('theme-light');
-            document.getElementById('slider').checked = true;
-        } else {
-            setTheme('theme-dark');
-            document.getElementById('slider').checked = false;
-        }
-    };
+    if (localStorage.getItem('theme') === 'theme-light') {
+        setTheme('theme-light');
+        document.getElementById('slider').checked = true;
+    } else {
+        setTheme('theme-dark');
+        document.getElementById('slider').checked = false;
+    }
+    flagTheme.value = localStorage.getItem('theme');
 })
 
 const isLoginPage = computed(() => {
