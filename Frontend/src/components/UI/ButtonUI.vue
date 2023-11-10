@@ -16,8 +16,8 @@ export default {
         min-width: 40%;
         color: #ffffff;
         padding: 0.5em;
-        background-color: #AA1418;
+        background-color: #AA1418;;
         border-radius: 10px;
-        font-size: 24px;
+        font-size: 20px;
     }
 </style>

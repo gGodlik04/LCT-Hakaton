@@ -7,7 +7,7 @@ import StatusButton from '@/components/StatusButton.vue';
             type: Object,
             required: true,
             default: () => {}
-        }
+        },
     })
 </script>
 
@@ -36,22 +36,21 @@ import StatusButton from '@/components/StatusButton.vue';
         <div class="task__date">
             {{ task.date_of_pont }}
         </div>
-        <ButtonUI class="task__button">Начать</ButtonUI>
+        <ButtonUI @click="openPopupInfo" class="task__button">Начать</ButtonUI>
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .task {
-        border: 1px solid #fff;
-        height: 18em;
-        width: 23em;
-        color: #FFFFFF;
+        height: 17em;
+        width: 22em;
+        color: var(--font-color);
         padding: 26px 30px;
         border-radius: 20px;
-        border: 3px solid #646464;
-        background: rgba(0, 9, 31, 0.8);
+        background: var(--color-accent);
         backdrop-filter: blur(2px);
         font-size: 18px;
+        font-family: 'MontseratReg';
         display: flex;
         flex-direction: column;
     }
@@ -96,5 +95,30 @@ import StatusButton from '@/components/StatusButton.vue';
     .taks__status_btn {
         margin-left: 15px;
         font-family: 'Montserat';
+    }
+
+    @media (max-width: $screen-lg) {
+        .task {
+            font-size: 15px;
+            height: fit-content;
+            min-height: 14em;
+            width: 20em;
+        }
+    }
+
+    @media (max-width: $screen-md) {
+        .task {
+            height: fit-content;
+            min-height: 19em;
+            width: 16em;
+        }
+    }
+
+    @media (max-width: $screen-sm) {
+        .task {
+            height: fit-content;
+            min-height: 19em;
+            width: 16em;
+        }
     }
 </style>

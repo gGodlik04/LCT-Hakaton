@@ -1,14 +1,47 @@
 <script setup>
 import Header from '@/components/Header.vue'
 import Task from '@/components/Task.vue'
-import Navbar from '@/components/Navbar.vue';
-import {ref, onMounted} from 'vue'
+import NavbarEmployee from '@/components/NavbarEmployee.vue';
+import {ref, onMounted, computed} from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
+import TasksDependsTab from '@/components/TasksDependsTab.vue';
 
 
 const tasksStore = useTasksStore();
 
+const amountTasks = ref(0)
+const screenWidth = ref(1980)
+const page = ref(1)
+
+const getScreenWidth = () => {
+  screenWidth.value = window.screen.width;
+}
+
+const getArrayAmountTasks = (tasks) => {
+  const pinTasks = [];
+  const firstNumberTask = page.value * amountTasks.value - amountTasks.value;
+  for (let firstTask = firstNumberTask; (firstTask  != (firstNumberTask + amountTasks.value)) && ((firstTask - 1)< tasks.length); firstTask++) {
+    if (!tasks[firstTask]) {
+      break
+    }
+    pinTasks.push(tasks[firstTask]);
+  }
+  return pinTasks;
+}
+
+const getAmountTasksInSlider = () => {
+   if (screenWidth.value >= 1440) {
+    return 6
+  }
+  if ((screenWidth.value < 1440) && (screenWidth.value >= 768)) {
+    return 2
+   } 
+   else return 1
+}
+
 onMounted(() => {
+  getScreenWidth()
+  amountTasks.value = getAmountTasksInSlider()
 })
 
 </script>
@@ -16,17 +49,34 @@ onMounted(() => {
 <template>
   <Header></Header>
   <div class="main-header">
-    <div class="main-header__tasks active">
-      Мои задачи
-    </div>
+    Мои задачи
   </div>
   <div class="container">
-    <Navbar class="navbar"/>
-    <div class="tasks-block">
-      <Task v-for="(task) in tasksStore.tasks" 
-        :key="task.address"
-        :task="task"
-      />
+    <NavbarEmployee class="navbar"/>
+    <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
+        <TasksDependsTab
+          :tasks="getArrayAmountTasks(tasksStore.currentTasks)"
+        />
+    </div>
+    <!-- <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
+        <TasksDependsTab
+          :tasks="tasksStore.tasks"
+        />
+    </div> -->
+    <div class="tasks-block tasks-block-week" v-if="tasksStore.activeTab == 3">
+        <TasksDependsTab
+          :tasks="tasksStore.weekTasks"
+        />
+    </div>
+    <div class="tasks-block tasks-block-completed" v-if="tasksStore.activeTab == 4">
+        <TasksDependsTab
+          :tasks="tasksStore.completedTasks"
+        />
+    </div>
+    <div class="tasks-block tasks-block-favorites" v-if="tasksStore.activeTab == 5">
+        <TasksDependsTab
+          :tasks="tasksStore.favoritesTasks"
+        />
     </div>
   </div>
   <div class="navigation">
@@ -39,15 +89,20 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   body {
     background-position-y: 70%
   }
   .container {
+    min-height: 80vh;
     display: grid;
     grid-template-columns: 2fr 10fr;
-    grid-template-rows: 100%;
-    grid-template-areas: "navbar tasks";
+    grid-template-rows: 99% 1%;
+    grid-template-areas: "navbar tasks" "navbar navigation";
+  } 
+
+  .navigation {
+    grid-area: 'navigation';
   }
 
   .navbar {
@@ -57,9 +112,9 @@ onMounted(() => {
   .tasks-block {
     grid-area: 'tasks';
     display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-template-rows: fit-content fit-content;
-    gap: 15px;
+    grid-template-columns: 31% 31% 31%;
+    grid-template-rows: 50% 50%;
+    gap: 20px;
   }
 
   .main-header {
@@ -68,7 +123,7 @@ onMounted(() => {
     padding: 0 37px 0 37px;
     margin-bottom: 14px;
     font-size: 34px;
-    color: #FFFFFF;
+    color: var(--font-color);
     display: flex;
     justify-content: space-between;
   }
@@ -82,4 +137,78 @@ onMounted(() => {
   .active {
     color: #AA1418;
   }
+
+  @media (max-width: $screen-md) {
+    .navbar {
+        position: absolute;
+        margin-top: 0;
+        top: 0;
+        z-index: 999;
+        height: 100vh;
+        width: fit-content;
+        background: var(--color-accent-mobile);
+        backdrop-filter: blur(20px);
+        display: none;
+    }
+    .tasks-block {
+      grid-area: 'tasks';
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: fit-content;
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .container {
+      grid-template-rows: fit-content 1%;
+      grid-template-areas: "navbar tasks" "navbar navigation";
+    }
+    
+    .navigation {
+      margin: 16px 0px 11px 135px;
+    }
+  }
+  @media (max-width: $screen-sm) {
+    .tasks-block {
+      grid-area: 'tasks';
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: fit-content fit-content;
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .container {
+      align-content: center;
+      grid-template-columns: 100% 50%;
+      grid-template-rows: fit-content 1%;
+      grid-template-areas: "tasks tasks" "navigation navigation";
+    } 
+
+  @media (max-width: $screen-small) {
+    .tasks-block {
+      grid-area: 'tasks';
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: fit-content fit-content;
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .container {
+      align-content: center;
+      grid-template-columns: 100% 50%;
+      grid-template-rows: fit-content 1%;
+      grid-template-areas: "tasks tasks" "navigation navigation";
+    } 
+
+    .navigation {
+      margin: 16px 0px 11px 20px;
+    }
+
+    .main-header {
+      justify-content: center;
+    }
+  }
+}
 </style>

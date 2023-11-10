@@ -1,0 +1,43 @@
+.theme-light {
+    --color-primary: #ECECEC;
+    --color-secondary: #313131;
+    --color-accent: rgba(255, 255, 255, 0.7);;
+    --color-accent-mobile: rgba(255, 255, 255, 0.8);
+    --color-header: #213A8B;
+    --color-status: #213A8B;
+    --font-color: #0D1B46;
+    --font-color-inactive: #909090;
+    --button-color: #DA5155;
+    --input-color: #F1F1F1;
+    --input-color-text: #000;
+    
+    body {
+      background-image: url('../images/SovcomBankLogoLight.png')
+    }
+
+    .task {
+      border: 0px;
+      box-shadow: 0px 0px 17px rgba(125.38, 125.38, 125.38, 0.25);
+    }
+  }
+  .theme-dark {
+    --color-primary: #00091F;
+    --color-secondary: #FFFFFF;
+    --color-accent: rgba(0, 9, 31, 0.8);
+    --color-accent-mobile: rgba(0, 9, 31, 0.8);
+    --color-header: rgba(0, 9, 31, 0);
+    --color-status: #FFFFFF;
+    --font-color: #ffffff;
+    --button-color: #AA1418;
+    --input-color: rgba(0, 9, 31, 0.7);;
+    --input-color-text: #FFFFFF;
+    --font-color-inactive: #FFFFFF;
+
+    .login__form-auth_input {
+      border: 0.5px solid #FFFFFF;
+    }
+
+    .task {
+      border: 3px solid #646464;
+    }
+  }
