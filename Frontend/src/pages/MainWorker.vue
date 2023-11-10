@@ -10,34 +10,38 @@ import TasksDependsTab from '@/components/TasksDependsTab.vue';
 const tasksStore = useTasksStore();
 
 const amountTasks = ref(0)
+const screenWidth = ref(1980)
 const page = ref(1)
 
-const getScreenWidth = computed(() => {
-  const screenWidth = window.screen.width;
-  return screenWidth
-})
+const getScreenWidth = () => {
+  screenWidth.value = window.screen.width;
+}
 
 const getArrayAmountTasks = (tasks) => {
   const pinTasks = [];
-  const firstNumberTask = page * amountTasks - amountTasks;
-  for (let firstTask; firstTask != (firstTask + amountTasks); firstTask++) {
+  const firstNumberTask = page.value * amountTasks.value - amountTasks.value;
+  for (let firstTask = firstNumberTask; (firstTask  != (firstNumberTask + amountTasks.value)) && ((firstTask - 1)< tasks.length); firstTask++) {
+    if (!tasks[firstTask]) {
+      break
+    }
     pinTasks.push(tasks[firstTask]);
   }
   return pinTasks;
 }
 
 const getAmountTasksInSlider = () => {
-   if (screenWidth >= 1440) {
+   if (screenWidth.value >= 1440) {
     return 6
-   }
-   if ((screenWidth < 1440) && (screenWidth >= 768)) {
+  }
+  if ((screenWidth.value < 1440) && (screenWidth.value >= 768)) {
     return 2
    } 
    else return 1
 }
 
 onMounted(() => {
-  amountTasks = getAmountTasksInSlider()
+  getScreenWidth()
+  amountTasks.value = getAmountTasksInSlider()
 })
 
 </script>
@@ -51,8 +55,7 @@ onMounted(() => {
     <NavbarEmployee class="navbar"/>
     <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
         <TasksDependsTab
-          :screenWidth="getScreenWidth"
-          :tasks="tasksStore.currentTasks"
+          :tasks="getArrayAmountTasks(tasksStore.currentTasks)"
         />
     </div>
     <!-- <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
@@ -62,19 +65,16 @@ onMounted(() => {
     </div> -->
     <div class="tasks-block tasks-block-week" v-if="tasksStore.activeTab == 3">
         <TasksDependsTab
-          :screenWidth="getScreenWidth"
           :tasks="tasksStore.weekTasks"
         />
     </div>
     <div class="tasks-block tasks-block-completed" v-if="tasksStore.activeTab == 4">
         <TasksDependsTab
-          :screenWidth="getScreenWidth"
           :tasks="tasksStore.completedTasks"
         />
     </div>
     <div class="tasks-block tasks-block-favorites" v-if="tasksStore.activeTab == 5">
         <TasksDependsTab
-          :screenWidth="getScreenWidth"
           :tasks="tasksStore.favoritesTasks"
         />
     </div>
@@ -139,35 +139,76 @@ onMounted(() => {
   }
 
   @media (max-width: $screen-md) {
+    .navbar {
+        position: absolute;
+        margin-top: 0;
+        top: 0;
+        z-index: 999;
+        height: 100vh;
+        width: fit-content;
+        background: var(--color-accent-mobile);
+        backdrop-filter: blur(20px);
+        display: none;
+    }
     .tasks-block {
       grid-area: 'tasks';
       display: grid;
       grid-template-columns: 50% 50%;
-      grid-template-rows: fit-content fit-content;
+      grid-template-rows: fit-content;
       gap: 20px;
+      justify-items: center;
     }
 
     .container {
       grid-template-rows: fit-content 1%;
       grid-template-areas: "navbar tasks" "navbar navigation";
-    } 
+    }
+    
+    .navigation {
+      margin: 16px 0px 11px 135px;
+    }
   }
   @media (max-width: $screen-sm) {
-    .navbar {
-      display: none;
-    }
     .tasks-block {
       grid-area: 'tasks';
       display: grid;
       grid-template-columns: 50% 50%;
       grid-template-rows: fit-content fit-content;
       gap: 20px;
+      justify-items: center;
     }
 
     .container {
       align-content: center;
+      grid-template-columns: 100% 50%;
       grid-template-rows: fit-content 1%;
       grid-template-areas: "tasks tasks" "navigation navigation";
     } 
+
+  @media (max-width: $screen-small) {
+    .tasks-block {
+      grid-area: 'tasks';
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: fit-content fit-content;
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .container {
+      align-content: center;
+      grid-template-columns: 100% 50%;
+      grid-template-rows: fit-content 1%;
+      grid-template-areas: "tasks tasks" "navigation navigation";
+    } 
+
+    .navigation {
+      margin: 16px 0px 11px 20px;
+    }
+
+    .main-header {
+      justify-content: center;
+    }
   }
+}
 </style>

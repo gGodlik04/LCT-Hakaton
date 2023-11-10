@@ -54,7 +54,7 @@ const changeTab = (id) => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .navbar {
     color: var(--font-color);
     font-size: 19px;
@@ -72,5 +72,11 @@ const changeTab = (id) => {
 .active::after {
     content: "\25CF";
     padding-left: 30px;
-  }
+}
+
+@media (max-width: $screen-md) { 
+    .navbar:first-child {
+        padding-top: 75px;
+    }
+}
 </style>

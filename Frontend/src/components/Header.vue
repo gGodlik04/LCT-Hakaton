@@ -223,5 +223,12 @@ const toggleTheme = () => {
             position: relative;
             left: 0px;
         }
+        
+        
+        @media (max-width: $screen-small) {
+        .header__gps-navbar_gps {
+            display: none;
+        }
+    }
     }
 </style>
