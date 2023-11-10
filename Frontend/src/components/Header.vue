@@ -45,7 +45,7 @@ const toggleTheme = () => {
 </script>
 
 <template>
-    <div class="header">
+    <div class="header" :class="isLoginPage ? 'header-login' : ''">
         <div class="header__gps-navbar" :class="isLoginPage ? 'header__gps-navbar-hidden' : ''">
             <NavbarIcon 
                 @click="openNavbar" 
@@ -205,7 +205,7 @@ const toggleTheme = () => {
     }
 
     @media (max-width: $screen-sm) {
-        .header {
+        .header-login {
             justify-content: center;
         }
         .header__gps-navbar-hidden {

@@ -40,7 +40,7 @@ import StatusButton from '@/components/StatusButton.vue';
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .task {
         height: 17em;
         width: 22em;
@@ -95,5 +95,30 @@ import StatusButton from '@/components/StatusButton.vue';
     .taks__status_btn {
         margin-left: 15px;
         font-family: 'Montserat';
+    }
+
+    @media (max-width: $screen-lg) {
+        .task {
+            font-size: 15px;
+            height: fit-content;
+            min-height: 14em;
+            width: 20em;
+        }
+    }
+
+    @media (max-width: $screen-md) {
+        .task {
+            height: fit-content;
+            min-height: 19em;
+            width: 16em;
+        }
+    }
+
+    @media (max-width: $screen-sm) {
+        .task {
+            height: fit-content;
+            min-height: 19em;
+            width: 16em;
+        }
     }
 </style>
