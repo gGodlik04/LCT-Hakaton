@@ -1,6 +1,9 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { useGlobalStore } from '@/stores/GlobalStore';
+import router from '@/router';
+
 
 export const useTasksStore = defineStore('tasksStore', {
   state: () => ({
@@ -88,20 +91,30 @@ export const useTasksStore = defineStore('tasksStore', {
     },
 
     async login(email, password) {
-      const resToken = await axios.post('/api/accounts/auth/token/login/', {
-        password: `${password}`,
-        email: `${email}`
-      }).then((response) => {
-        window.localStorage.setItem('token', `Token ${response.data.auth_token}`)
-      }).then(async () => {
+      const globalStore = useGlobalStore();
+      try {
+        globalStore.toggleLoading()
+        const resToken = await axios.post('/api/accounts/auth/token/login/', {
+          password: `${password}`,
+          email: `${email}`
+        })
+        window.localStorage.setItem('token', `Token ${resToken.data.auth_token}`)
         const resRole = await axios.get('/api/accounts/users/me/', {
           headers: {
-            Authorization: this.tokenLocalStorage
+            Authorization: `Token ${resToken.data.auth_token}`
           }
-        }).then((response) => {
-          window.localStorage.setItem('role', response.data.role)
         })
-      })
+        window.localStorage.setItem('role', resRole.data.role)
+
+        globalStore.setToken(`Token ${resToken.data.auth_token}`)
+        globalStore.setRole(resRole.data.role)
+
+        router.push({ path: '/' })
+        
+        globalStore.toggleLoading()
+      } catch (error) {
+        globalStore.toggleLoading()
+      }
     },
 
     async fetchTasks() {
