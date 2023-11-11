@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, toRaw } from 'vue';
 import { useManagerStore } from '@/stores/ManagerStore';
 
 const managerStore = useManagerStore()
@@ -8,8 +8,7 @@ const dataTable = ref()
 
 onMounted(() => {
     managerStore.getAllPoints(1,2)
-    dataTable.value = managerStore.allPointsLocalStorage
-    console.log(dataTable.value);
+    dataTable.value = managerStore.allPoints
 })
 
 </script>
@@ -18,7 +17,6 @@ onMounted(() => {
     <div class="table-points">
         <table>
             <thead>
-                <th>№ точки</th>
                 <th>Адрес точки</th>
                 <th>Когда подключена точка?</th>
                 <th>Карты и материалы доставлены?</th>
@@ -27,27 +25,24 @@ onMounted(() => {
                 <th>Кол-во выданных карт</th>
             </thead>
             <tbody>
-                <tr v-for="(point) in dataTable.value" :key="uuid">
-                    <td :key="uuid">
-                        {{ point?. }}
+                <tr v-for="(point) in dataTable" :key="point.uuid">
+                    <td :key="point.uuid">
+                        {{ point.address }}
                     </td>
-                    <td :key="uuid">
-                        {{ value.value }}
+                    <td :key="point.uuid">
+                        {{ point.agent_point_date }}
                     </td>
-                    <td :key="uuid">
-                        {{ value.value }}
+                    <td :key="point.uuid">
+                        {{ point.materials ? 'да' : 'нет' }}
                     </td>
-                    <td :key="uuid">
-                        {{ value.value }}
+                    <td :key="point.uuid">
+                        {{ point.last_card_given }}
                     </td>
-                    <td :key="uuid">
-                        {{ value.value }}
+                    <td :key="point.uuid">
+                        {{ point.approved_requests }}
                     </td>
-                    <td :key="uuid">
-                        {{ value.value }}
-                    </td>
-                    <td :key="uuid">
-                        {{ value.value }}
+                    <td :key="point.uuid">
+                        {{ point.num_given_cards }}
                     </td>
                 </tr>
             </tbody>

@@ -1,11 +1,25 @@
 <script setup>
-    const props = defineProps({
-        dataTable: {
-            type: Object,
-            required: true,
-            default: () => {}
-        }
-    })
+import { useTasksStore } from '@/stores/TasksStore';
+import {onMounted, ref} from 'vue'
+
+
+const props = defineProps({
+    dataTable: {
+        type: Object,
+        required: true,
+        default: () => {}
+    }
+})
+
+const dataTable = ref()
+
+const tasksStore = useTasksStore()
+
+onMounted(async () => {
+    await tasksStore.fetchTasks()
+    dataTable.value = tasksStore.getAllTasks;
+    console.log(dataTable);
+})
 
 </script>
 
@@ -13,7 +27,6 @@
     <div class="table-tasks">
         <table>
             <thead>
-                <th>Тип</th>
                 <th>Название задачи</th>
                 <th>Приоритет</th>
                 <th>Время выполнения</th>
@@ -21,8 +34,17 @@
                 <th>Требуемый уровень сотрудника</th>
             </thead>
             <tbody>
-                <tr v-for="(taskType) in dataTable" :key="taskType.type">
-                    <td v-for="(value) in taskType" :key="type">
+                <tr v-for="(task) in dataTable" :key="task.type">
+                    <td :key="type">
+                        {{ value }}
+                    </td>
+                    <td :key="type">
+                        {{ value }}
+                    </td>
+                    <td :key="type">
+                        {{ value }}
+                    </td>
+                    <td :key="type">
                         {{ value }}
                     </td>
                 </tr>

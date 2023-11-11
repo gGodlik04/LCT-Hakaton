@@ -21,8 +21,8 @@ export const useGlobalStore = defineStore('globalStore', {
     toggleNavbar() {
       this.flagNavbar = !this.flagNavbar
     },
-    toggleLoading() {
-      this.loading = !this.loading
+    toggleLoading(flag) {
+      this.loading = flag
     },
   }
 });

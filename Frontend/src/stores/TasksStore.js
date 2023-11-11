@@ -7,62 +7,7 @@ import router from '@/router';
 
 export const useTasksStore = defineStore('tasksStore', {
   state: () => ({
-    tasks: [
-      {
-        name: 'Обучений агента',
-        address: 'ул. Ставропольская, д. 140',
-        time: 4,
-        priority: 1,
-        date_of_pont: '05.11.2023',
-        status: 1,
-        about: 'Более подробная информация',
-      },
-      {
-        name: 'Стимулирование работы',
-        address: 'ул. им. Максима Горького, д. 128',
-        time: 2,
-        priority: 2,
-        date_of_pont: '10.11.2023',
-        status: 2,
-        about: 'Более подробная информация22222',
-      },
-      {
-        name: 'Доставка карт и материалов',
-        address: 'ул. им. Петрова, д. 321',
-        time: 1,
-        priority: 3,
-        date_of_pont: '11.12.2023',
-        status: 3,
-        about: 'Более подробная информация3333',
-      },
-      {
-        name: 'Обучений агента',
-        address: 'ул. Ставропольская, д. 140',
-        time: 4,
-        priority: 1,
-        date_of_pont: '05.11.2023',
-        status: 4,
-        about: 'Более подробная информация',
-      },
-      {
-        name: 'Стимулирование работы',
-        address: 'ул. им. Максима Горького, д. 128',
-        time: 2,
-        priority: 2,
-        date_of_pont: '10.11.2023',
-        status: 2,
-        about: 'Более подробная информация22222',
-      },
-      {
-        name: 'Доставка карт и материалов',
-        address: 'ул. им. Петрова, д. 321',
-        time: 1,
-        priority: 3,
-        date_of_pont: '11.12.2023',
-        status: 3,
-        about: 'Более подробная информация3333',
-      },
-    ],
+    tasks: [],
     employeeInfo:[],
     activeTab: 1,
   }),
@@ -78,6 +23,9 @@ export const useTasksStore = defineStore('tasksStore', {
     },
     favoritesTasks() {
       return this.tasks.filter(el => el.status != 4)
+    },
+    getAllTasks() {
+      return this.tasks
     },
     tokenLocalStorage() {
       return window.localStorage.getItem('token', JSON.stringify())
@@ -95,9 +43,9 @@ export const useTasksStore = defineStore('tasksStore', {
     },
 
     async login(email, password) {
-      const globalStore = useGlobalStore();
       try {
-        globalStore.toggleLoading()
+        const globalStore = useGlobalStore();
+        globalStore.toggleLoading(true)
         const resToken = await axios.post('/api/accounts/auth/token/login/', {
           password: `${password}`,
           email: `${email}`
@@ -111,23 +59,29 @@ export const useTasksStore = defineStore('tasksStore', {
         await window.localStorage.setItem('role', resRole.data.role)
         localStorage.setItem("employeeInfo",JSON.stringify(resRole.data));
         
-        globalStore.toggleLoading()
+        globalStore.toggleLoading(false)
       } catch (error) {
-        globalStore.toggleLoading()
-      }
-      finally {
-        location.reload()
+        console.log(error);
+        globalStore.toggleLoading(false)
       }
     },
 
     async fetchTasks() {
-      const resTasks = await axios.get('/api/task/task/', {
-        headers: {
-          Authorization: this.tokenLocalStorage
-        }
-      }).then((res) => {
-        this.tasks = res.data.tasks;
-      })
+      try {
+        const globalStore = useGlobalStore();
+        globalStore.toggleLoading(true)
+        const resTasks = await axios.get('/api/task/task/', {
+          headers: {
+            Authorization: this.tokenLocalStorage
+          }
+        }).then((res) => {
+          this.tasks = res.data.tasks;
+        })
+        globalStore.toggleLoading(false)    
+      } catch (error) {
+        globalStore.toggleLoading(false)    
+        console.log(error);
+      }
     }
   }
 });

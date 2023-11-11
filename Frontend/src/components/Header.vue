@@ -20,7 +20,6 @@ const employeeInfo = ref();
 
 onMounted(() => {
     employeeInfo.value = tasksStore.getEmployeeInfo
-    console.log(employeeInfo.value.first_name);
     if (localStorage.getItem('theme') === 'theme-light') {
         setTheme('theme-light');
         document.getElementById('slider').checked = true;
