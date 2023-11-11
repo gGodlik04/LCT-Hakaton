@@ -1,11 +1,13 @@
 env
+.env
+.idea
 Backend/.env
 venv
 *.log
 Frontend/env/
-Frontend/Backend/*
-Frontend/Frontend/*
+Frontend/node_modules
 Backend/static
 Backend/media
 Backend/logs
 DbData/dbfiles
+.vscode

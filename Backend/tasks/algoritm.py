@@ -24,6 +24,7 @@ class TaskDistributor:
 
         self.cnt = 0
 
+
     def set_task(self, point):
         """
         Установка для каждой задачи приоритета

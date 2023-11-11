@@ -40,11 +40,20 @@ class TaskViewSet(mixins.ListModelMixin,
         serializer = self.get_serializer(queryset, many=True)
 
         if user.is_worker_user():
-            queryset = queryset.filter(employee=user)
+            queryset = queryset.filter(employee=user, status=1)
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
         return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def all(self, request):
+        user = self.request.user
+        queryset = self.get_queryset()
+
+        if user.is_manager_user():
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         user = self.request.user
@@ -54,6 +63,10 @@ class TaskViewSet(mixins.ListModelMixin,
             if user.is_manager_user():
                 self.perform_create(serializer)
                 return Response('task created! status 200', status=status.HTTP_201_CREATED)
+            else:
+                return Response('you have no rights for that', status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, *args, **kwargs):
         task = self.get_object()
