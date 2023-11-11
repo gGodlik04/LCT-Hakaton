@@ -13,6 +13,6 @@ def send_tasks():
     print(env.str('API_OPENROUTE_KEY'))
 
 
-send_tasks()
+#send_tasks()
 
 
