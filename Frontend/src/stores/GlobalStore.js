@@ -5,18 +5,24 @@ import axios from 'axios'
 export const useGlobalStore = defineStore('globalStore', {
   state: () => ({
     flagNavbar: false,
+    loading: false,
+    token: '',
+    role: 0,
   }),
   getters: {
     getFlagNavbar() {
       return this.flagNavbar
     },
+    isLoading() {
+      return this.loading
+    },
   },
   actions: {
-    setFlagNavbar(flag) {
-      this.flagNavbar = flag
-    },
     toggleNavbar() {
       this.flagNavbar = !this.flagNavbar
-    }
+    },
+    toggleLoading() {
+      this.loading = !this.loading
+    },
   }
 });

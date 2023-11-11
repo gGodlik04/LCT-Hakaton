@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainWorker from '@/pages/MainWorker.vue'
 import MainManager from '@/pages/MainManager.vue'
 import Login from '@/pages/Login.vue'
-import { useTasksStore } from '../stores/TasksStore';
+import { useTasksStore } from '@/stores/TasksStore';
 
 
 const router = createRouter({
@@ -31,16 +31,15 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach( async(to, from) => {
-//   const tasksStore = await useTasksStore();
-//   console.log(!tasksStore.tokenLocalStorage);
-//   if (!tasksStore.tokenLocalStorage && to.name !== 'login') {
-//     return { name: 'login' }
-//   } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 2 && to.name !== 'mainWorker') {
-//     return { name: 'mainWorker' }
-//   } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 3 && to.name !== 'MainManager') {
-//     return { name: 'MainManager' }
-//   }
-// })
+router.beforeEach( async(to, from) => {
+  const tasksStore = await useTasksStore();
+  if (!tasksStore.tokenLocalStorage && to.name !== 'login') {
+    return { name: 'login' }
+  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 2 && to.name !== 'mainWorker') {
+    return { name: 'mainWorker' }
+  } else if (tasksStore.tokenLocalStorage && tasksStore.roleLocalStorage == 1 && to.name !== 'MainManager') {
+    return { name: 'MainManager' }
+  }
+})
 
 export default router

@@ -2,6 +2,13 @@
 import Header from '@/components/Header.vue'
 import {ref, onMounted} from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
+import ModalLoading from '../components/UI/ModalLoading.vue';
+import { useGlobalStore } from '@/stores/GlobalStore';
+
+
+
+
+const globalStore = useGlobalStore();
 
 
 const tasksStore = useTasksStore();
@@ -10,7 +17,7 @@ const tasksStore = useTasksStore();
 const email = ref('');
 const password = ref('');
 
-const loginFormSubmit = () => {
+const loginFormSubmit = async () => {
   tasksStore.login(email.value, password.value)
 }
 
@@ -31,8 +38,20 @@ const setActive = (e) => {  // Функционал входа для разны
     </div>
     <div class="login__form"></div>
       <form class="login__form-auth">
-        <input class="login__form-auth_input" v-model="email" type="text" autofocus placeholder="Введите email">
-        <input class="login__form-auth_input" v-model="password" type="password" placeholder="Введите пороль">
+        <input 
+          class="login__form-auth_input" 
+          v-model="email" 
+          type="text" 
+          autofocus 
+          placeholder="Введите email" 
+          >
+          <input 
+          class="login__form-auth_input" 
+          v-model="password" 
+          type="password" 
+          placeholder="Введите пороль"
+          autocomplete="on"
+        >
         <ButtonUI @click="loginFormSubmit" class="login__from-auth_submit-buttonUI">Войти</ButtonUI>
       </form>
   </div>

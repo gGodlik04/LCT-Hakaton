@@ -34,9 +34,7 @@ const managerStore = useManagerStore();
         :class="globalStore.getFlagNavbar ? 'active-navbar' : 'inactive-navbar'"
     />
     <div class="content-main" v-if="managerStore.activeTab == 1">
-        <ManagerPointsTable
-            :dataTable="managerStore.getDataPoints"
-        />
+        <ManagerPointsTable/>
     </div>
     <div class="content-main" v-if="managerStore.activeTab == 2">
         <ManagerTaskDirectoryTable

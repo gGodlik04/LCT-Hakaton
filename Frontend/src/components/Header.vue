@@ -4,8 +4,10 @@ import Profile from '@/components/icons/Profile.vue'
 import Gps from '@/components/icons/Gps.vue'
 import NavbarIcon from '@/components/icons/NavbarIcon.vue'
 import { useGlobalStore } from '@/stores/GlobalStore';
+import { useTasksStore } from '../stores/TasksStore';
 import { onMounted, computed, ref} from 'vue';
 
+const tasksStore = useTasksStore();
 const globalStore = useGlobalStore();
 
 const setTheme = (themeName) => {
@@ -14,8 +16,11 @@ const setTheme = (themeName) => {
 }
 
 const flagTheme = ref('theme-dark')
+const employeeInfo = ref();
 
 onMounted(() => {
+    employeeInfo.value = tasksStore.getEmployeeInfo
+    console.log(employeeInfo.value.first_name);
     if (localStorage.getItem('theme') === 'theme-light') {
         setTheme('theme-light');
         document.getElementById('slider').checked = true;
@@ -63,10 +68,12 @@ const toggleTheme = () => {
             />
         </div>
         <div class="header__auth">
-            <div class="header__auth_employee">Дерягин Н. В.</div>
+            <div class="header__auth-employee">
+                {{ employeeInfo?.first_name }} {{ employeeInfo?.last_name }}
+            </div>
             <div class="header__auth_icon">
                 <Profile
-                :theme="flagTheme"
+                    :theme="flagTheme"
                 />
             </div>
             <div class="change-theme">

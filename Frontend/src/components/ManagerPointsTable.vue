@@ -1,11 +1,16 @@
 <script setup>
-    const props = defineProps({
-        dataTable: {
-            type: Object,
-            required: true,
-            default: () => {}
-        }
-    })
+import { onMounted, ref } from 'vue';
+import { useManagerStore } from '@/stores/ManagerStore';
+
+const managerStore = useManagerStore()
+
+const dataTable = ref()
+
+onMounted(() => {
+    managerStore.getAllPoints(1,2)
+    dataTable.value = managerStore.allPointsLocalStorage
+    console.log(dataTable.value);
+})
 
 </script>
 
@@ -22,9 +27,27 @@
                 <th>Кол-во выданных карт</th>
             </thead>
             <tbody>
-                <tr v-for="(point) in dataTable" :key="point.id_point">
-                    <td v-for="(value) in point" :key="id_point">
-                        {{ value }}
+                <tr v-for="(point) in dataTable.value" :key="uuid">
+                    <td :key="uuid">
+                        {{ point?. }}
+                    </td>
+                    <td :key="uuid">
+                        {{ value.value }}
+                    </td>
+                    <td :key="uuid">
+                        {{ value.value }}
+                    </td>
+                    <td :key="uuid">
+                        {{ value.value }}
+                    </td>
+                    <td :key="uuid">
+                        {{ value.value }}
+                    </td>
+                    <td :key="uuid">
+                        {{ value.value }}
+                    </td>
+                    <td :key="uuid">
+                        {{ value.value }}
                     </td>
                 </tr>
             </tbody>
