@@ -6,8 +6,8 @@ const managerStore = useManagerStore()
 
 const dataTable = ref()
 
-onMounted(() => {
-    managerStore.getAllPoints(1,2)
+onMounted(async () => {
+    await managerStore.getAllPoints(1,2)
     dataTable.value = managerStore.allPoints
 })
 

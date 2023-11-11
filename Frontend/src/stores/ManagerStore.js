@@ -51,12 +51,12 @@ export const useManagerStore = defineStore('managerStore', {
       const globalStore = useGlobalStore()
       const tasksStore = useTasksStore()
       try {
-        const resEmployees = await axios.get('/api/accounts/users/', {
+        const resEmployees = await axios.get('/api/accounts/accounts/', {
           headers: {
             Authorization: tasksStore.tokenLocalStorage
           }
         })
-        this.employees = resEmployees.results
+        this.employees = resEmployees.data.results
         globalStore.toggleLoading(false)
       } catch (error) {
         globalStore.toggleLoading(false)

@@ -13,10 +13,20 @@ import { useManagerStore} from '../stores/ManagerStore';
 const managerStore = useManagerStore()
 const dataTable = ref()
 
-onBeforeMount(() => {
-    managerStore.fetchAllEmployees()
+const getGrade  = (grade) => {
+    switch (grade){
+        case '1':
+            return 'джун'
+        case '2':
+            return 'мидл'
+        case '3':
+            return 'сеньор'
+    }
+}
+
+onBeforeMount(async () => {
+    await managerStore.fetchAllEmployees()
     dataTable.value = managerStore.getDataEmployees;
-    console.log(dataTable.value);
 })
 
 </script>
