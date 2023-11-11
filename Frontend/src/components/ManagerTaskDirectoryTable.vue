@@ -18,7 +18,6 @@ const tasksStore = useTasksStore()
 onMounted(async () => {
     await tasksStore.fetchTasks()
     dataTable.value = tasksStore.getAllTasks;
-    console.log(dataTable.value);
 })
 
 </script>

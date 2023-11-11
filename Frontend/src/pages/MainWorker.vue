@@ -52,9 +52,9 @@ onMounted(() => {
 
 <template>
   <Header></Header>
-  <ModalWindow v-model:show="modalVisible">
+  <!-- <ModalWindow v-model:show="modalVisible">
       dsadasdasdas
-  </ModalWindow>
+  </ModalWindow> -->
   <div class="main-header">
     Мои задачи
   </div>

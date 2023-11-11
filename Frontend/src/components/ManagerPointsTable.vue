@@ -71,9 +71,8 @@ onMounted(async () => {
 
     table {
         // table-layout: fixed;
-        // width: 100%;
+        width: 100%;
         border-collapse: collapse;
-        overflow: auto;
         table-layout: fixed;
     }
 

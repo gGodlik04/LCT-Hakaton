@@ -6,20 +6,23 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ModalWindow',
-    props: {
-        show: {
-            type: Boolean,
-            default: true,
-        }
-    },
-    methods: {
-        hideModal() {
-            this.$emit('update:show', false)
-        }
-    },
+<script setup>
+import {defineEmits} from 'vue'
+
+name: 'ModalWindow';
+
+const props = defineProps({
+    show: {
+        type: Boolean,
+        default: false,
+    }
+})
+
+const emit = defineEmits(['visibleModal'])
+
+const hideModal = () => {
+    emit('visibleModal')
+    console.log('da');
 }
 </script>
 
