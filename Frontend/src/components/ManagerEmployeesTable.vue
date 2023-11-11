@@ -1,4 +1,8 @@
 <script setup>
+import {onMounted, ref, onBeforeMount} from 'vue'
+import { useManagerStore} from '../stores/ManagerStore';
+
+
     const props = defineProps({
         dataTable: {
             type: Object,
@@ -6,6 +10,24 @@
             default: () => {}
         }
     })
+const managerStore = useManagerStore()
+const dataTable = ref()
+
+const getGrade  = (grade) => {
+    switch (grade){
+        case '1':
+            return 'джун'
+        case '2':
+            return 'мидл'
+        case '3':
+            return 'сеньор'
+    }
+}
+
+onBeforeMount(async () => {
+    await managerStore.fetchAllEmployees()
+    dataTable.value = managerStore.getDataEmployees;
+})
 
 </script>
 
@@ -15,12 +37,22 @@
             <thead>
                 <th>ФИО</th>
                 <th>Адрес локации</th>
+                <th>Email</th>
                 <th>Грейд</th>
             </thead>
             <tbody>
-                <tr v-for="(employee) in dataTable" :key="employee.full_name">
-                    <td v-for="(value) in employee" :key="full_name">
-                        {{ value }}
+                <tr v-for="(employee) in dataTable" :key="employee.uuid">
+                    <td :key="employee.uuid">
+                        {{ employee.first_name }} {{ employee.last_name }} {{ employee.middle_name }}
+                    </td>
+                    <td :key="employee.uuid">
+                        {{ employee.address }}
+                    </td>
+                    <td :key="employee.uuid">
+                        {{ employee.email }}
+                    </td>
+                    <td :key="employee.uuid">
+                        {{ employee.grade }}
                     </td>
                 </tr>
             </tbody>

@@ -30,13 +30,13 @@ const changeTab = (id) => {
         >
             На карте
         </div>
-        <div 
+        <!-- <div 
             @click="changeTab(3)" 
             class="navbar__week"
             :class="(activeTab == 3) ? 'active' : ''"
         >
             На неделю
-        </div>
+        </div> -->
         <div 
             @click="changeTab(4)" 
             class="navbar__completed"

@@ -8,11 +8,6 @@ const props = defineProps({
         required: true,
         default: () => {}
     },
-    // screenWidth: {
-    //     type: Number,
-    //     required: true,
-    //     default: 1980
-    // }
 })
 
 onMounted (() => {

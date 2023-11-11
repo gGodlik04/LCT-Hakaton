@@ -7,25 +7,33 @@ import ManagerTaskDirectoryTable from '@/components/ManagerTaskDirectoryTable.vu
 import ManagerEmployeesTable from '@/components/ManagerEmployeesTable.vue'
 import InfoPanelManager from '@/components/InfoPanelManager.vue';
 import { useGlobalStore } from '@/stores/GlobalStore';
+import FormAddPoint from '@/components/FormAddPoint.vue';
+import {ref, defineEmits} from 'vue'
+import ModalUI from '@/components/UI/ModalUI.vue';
 
 const globalStore = useGlobalStore();
 const managerStore = useManagerStore();
+
+const fetchData = (event) => {
+    modalVisible.value = event
+}
+
+const modalVisible = ref(false);
 
 </script>
 
 <template>
 <Header></Header>
+<ModalUI :show="modalVisible" class="modal-window-employee" @visibleModal="fetchData($event)">
+      <FormAddPoint/>
+</ModalUI>
 <div class="main-header">
     <div class="main-header__title">
         Задачи
     </div>
     <div class="main-header__buttons">
-        <ButtonUI class="main-header__button main-header__buttons-create-point" v-if="managerStore.activeTab == 1">Добавить точку</ButtonUI>
+        <ButtonUI class="main-header__button main-header__buttons-create-point" @click="modalVisible=true" v-if="managerStore.activeTab == 1"><UploadFile class="main-header__buttons-upload-file-icon"/>Добавить точку</ButtonUI>
         <ButtonUI class="main-header__button main-header__buttons-create-employee" v-if="managerStore.activeTab == 3">Добавить сотрудника</ButtonUI>
-        <ButtonUI class="main-header__button main-header__buttons-upload-file">
-            <UploadFile/>
-            Добавить точку
-        </ButtonUI>
     </div>
 </div>
 <div class="container-wrapper">
@@ -102,6 +110,12 @@ const managerStore = useManagerStore();
     display: flex;
     background-color: #FFFFFF;
     color: #000;
+}
+
+.main-header__buttons-upload-file-icon {
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
 }
 
 .active {

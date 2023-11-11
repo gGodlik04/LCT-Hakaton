@@ -1,11 +1,24 @@
 <script setup>
-    const props = defineProps({
-        dataTable: {
-            type: Object,
-            required: true,
-            default: () => {}
-        }
-    })
+import { useTasksStore } from '@/stores/TasksStore';
+import {onMounted, ref} from 'vue'
+
+
+const props = defineProps({
+    dataTable: {
+        type: Object,
+        required: true,
+        default: () => {}
+    }
+})
+
+const dataTable = ref()
+
+const tasksStore = useTasksStore()
+
+onMounted(async () => {
+    await tasksStore.fetchTasks()
+    dataTable.value = tasksStore.getAllTasks;
+})
 
 </script>
 
@@ -13,17 +26,28 @@
     <div class="table-tasks">
         <table>
             <thead>
-                <th>Тип</th>
                 <th>Название задачи</th>
                 <th>Приоритет</th>
                 <th>Время выполнения</th>
-                <th>Условие назначения</th>
+                <th>Адрес точки задачи</th>
                 <th>Требуемый уровень сотрудника</th>
             </thead>
             <tbody>
-                <tr v-for="(taskType) in dataTable" :key="taskType.type">
-                    <td v-for="(value) in taskType" :key="type">
-                        {{ value }}
+                <tr v-for="(task) in dataTable" :key="task.uuid">
+                    <td :key="task.uuid">
+                        {{ task.task_type.name}}
+                    </td>
+                    <td :key="task.uuid">
+                        {{ task.task_type.priority}}
+                    </td>
+                    <td :key="task.uuid">
+                        {{ task.task_type.work_time }} час.
+                    </td>
+                    <td :key="task.uuid">
+                        {{ task.agent_point.address}}
+                    </td>
+                    <td :key="task.uuid">
+                        {{ task.task_type.grade }}
                     </td>
                 </tr>
             </tbody>
@@ -41,6 +65,10 @@
         backdrop-filter: blur(2px);
         margin-top: 24px;
         margin-right: 37px;
+    }
+    
+    table {
+        width: 100%;
     }
 
     th,td {

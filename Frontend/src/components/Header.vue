@@ -20,7 +20,6 @@ const employeeInfo = ref();
 
 onMounted(() => {
     employeeInfo.value = tasksStore.getEmployeeInfo
-    console.log(employeeInfo.value.first_name);
     if (localStorage.getItem('theme') === 'theme-light') {
         setTheme('theme-light');
         document.getElementById('slider').checked = true;
@@ -101,9 +100,8 @@ const toggleTheme = () => {
     }
 
     .header__gps-navbar_logo {
-        position: relative;
-        bottom: 4px;
-        left: 140px;
+        position: absolute;
+        left: 45%;
     }
 
     .header__gps-navbar {
@@ -227,10 +225,10 @@ const toggleTheme = () => {
             display: none;
         }
 
-        .header__gps-navbar_logo {
-            position: relative;
-            left: 0px;
-        }
+        // .header__gps-navbar_logo {
+        //     position: relative;
+        //     left: 0px;
+        // }
         
         
         @media (max-width: $screen-small) {
