@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from tasks.models.tasks import Task
+from directories.serializers import TaskTypeSerializer, AgentPointSerializer
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
@@ -22,6 +23,10 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+
+    task_type = TaskTypeSerializer(read_only=True)
+    agent_point = AgentPointSerializer(read_only=True)
+
     class Meta:
         model = Task
         fields = [

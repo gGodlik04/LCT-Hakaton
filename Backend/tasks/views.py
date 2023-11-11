@@ -46,6 +46,15 @@ class TaskViewSet(mixins.ListModelMixin,
 
         return Response(serializer.data)
 
+    @action(methods=['get'], detail=False)
+    def all(self, request):
+        user = self.request.user
+        queryset = self.get_queryset()
+
+        if user.is_manager_user():
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
     def create(self, request, *args, **kwargs):
         user = self.request.user
 
