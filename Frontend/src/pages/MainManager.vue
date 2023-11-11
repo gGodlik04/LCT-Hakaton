@@ -15,6 +15,9 @@ const managerStore = useManagerStore();
 
 <template>
 <Header></Header>
+<ModalWindow v-model:show="modalVisible" class="modal-window-employee">
+      dsadasdasdas
+</ModalWindow>
 <div class="main-header">
     <div class="main-header__title">
         Задачи
@@ -23,7 +26,7 @@ const managerStore = useManagerStore();
         <ButtonUI class="main-header__button main-header__buttons-create-point" v-if="managerStore.activeTab == 1">Добавить точку</ButtonUI>
         <ButtonUI class="main-header__button main-header__buttons-create-employee" v-if="managerStore.activeTab == 3">Добавить сотрудника</ButtonUI>
         <ButtonUI class="main-header__button main-header__buttons-upload-file">
-            <UploadFile/>
+            <UploadFile class="main-header__buttons-upload-file-icon"/>
             Добавить точку
         </ButtonUI>
     </div>
@@ -83,6 +86,10 @@ const managerStore = useManagerStore();
     color: var(--font-color);
 }
 
+// .modal-window-employee {
+//     width: 50%;
+// }
+
 .main-header__title {
     font-size: 34px;
 }
@@ -102,6 +109,12 @@ const managerStore = useManagerStore();
     display: flex;
     background-color: #FFFFFF;
     color: #000;
+}
+
+.main-header__buttons-upload-file-icon {
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
 }
 
 .active {

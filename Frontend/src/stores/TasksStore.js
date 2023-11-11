@@ -58,7 +58,7 @@ export const useTasksStore = defineStore('tasksStore', {
         })
         await window.localStorage.setItem('role', resRole.data.role)
         localStorage.setItem("employeeInfo",JSON.stringify(resRole.data));
-        
+        location.reload()
         globalStore.toggleLoading(false)
       } catch (error) {
         console.log(error);

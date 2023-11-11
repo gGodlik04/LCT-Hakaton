@@ -12,6 +12,8 @@ const tasksStore = useTasksStore();
 const amountTasks = ref(0)
 const screenWidth = ref(1980)
 const page = ref(1)
+const tasks = ref()
+const show = ref(false)
 
 const getScreenWidth = () => {
   screenWidth.value = window.screen.width;
@@ -42,12 +44,17 @@ const getAmountTasksInSlider = () => {
 onMounted(() => {
   getScreenWidth()
   amountTasks.value = getAmountTasksInSlider()
+  tasksStore.fetchTasks()
+  tasks.value = getAllTasks()
 })
 
 </script>
 
 <template>
   <Header></Header>
+  <ModalWindow v-model:show="modalVisible">
+      dsadasdasdas
+  </ModalWindow>
   <div class="main-header">
     Мои задачи
   </div>
@@ -131,7 +138,7 @@ onMounted(() => {
   .navigation {
     display: flex;
     justify-content: center;
-    margin: 16px 0px 11px 195px;
+    margin-right: 10px;
   }
 
   .active {
