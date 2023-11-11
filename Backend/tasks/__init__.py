@@ -1,5 +1,6 @@
 from .algoritm import TaskDistributor
+from .tasks import send_tasks
 
 __all__ = [
-    'TaskDistributor'
+    'TaskDistributor', 'send_tasks'
 ]
