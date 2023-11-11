@@ -10,6 +10,7 @@ class UserView(viewsets.GenericViewSet,
                mixins.ListModelMixin,
                mixins.UpdateModelMixin,
                mixins.CreateModelMixin):
+
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = [permissions.IsAuthenticated, ]
