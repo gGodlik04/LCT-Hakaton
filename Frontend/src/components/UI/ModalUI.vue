@@ -46,7 +46,7 @@ const hideModal = () => {
     min-width: 30em;
 
     border-radius: 20px;
-    border: 3px solid #646464;
+    border: 3px solid var(--color-secondary);
     box-shadow: 0px 0px 17px 0px rgba(125, 125, 125, 0.25);
 }
 </style>

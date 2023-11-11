@@ -12,6 +12,10 @@ import { useGlobalStore } from '../stores/GlobalStore';
     })
 
     const globalStore = useGlobalStore();
+
+    const openPopupInfo = () => {
+        
+    }
 </script>
 
 <template>
@@ -21,14 +25,14 @@ import { useGlobalStore } from '../stores/GlobalStore';
                 :priority="task.priority"
             />
             <div class="task__title_name">
-                {{ task.name }}
+                {{ task.task_type.name }}
             </div>
         </div>
         <div class="task__address">
-            Адрес: {{ task.address }}
+            Адрес: {{ task.agent_point.address }}
         </div>
         <div class="task__time">
-            Время выполнения: {{ task.time }} час
+            Время выполнения: {{ task.task_type.work_time }} час
         </div>
         <div class="task__status">
            Cтатус: <StatusButton
@@ -37,7 +41,7 @@ import { useGlobalStore } from '../stores/GlobalStore';
            />
         </div>
         <div class="task__date">
-            {{ task.date_of_pont }}
+            {{ task.appointment_date}}
         </div>
         <ButtonUI @click="openPopupInfo" class="task__button">Начать</ButtonUI>
     </div>
@@ -45,8 +49,9 @@ import { useGlobalStore } from '../stores/GlobalStore';
 
 <style scoped lang="scss">
     .task {
-        height: 17em;
+        height: fit-content;
         width: 22em;
+        min-height: 19em;
         color: var(--font-color);
         padding: 26px 30px;
         border-radius: 20px;
@@ -56,6 +61,10 @@ import { useGlobalStore } from '../stores/GlobalStore';
         font-family: 'MontseratReg';
         display: flex;
         flex-direction: column;
+    }
+
+    .task__date {
+        margin-bottom: 0px !important;
     }
 
     .task__title {

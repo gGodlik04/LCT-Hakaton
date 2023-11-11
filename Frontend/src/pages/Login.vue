@@ -49,7 +49,7 @@ const setActive = (e) => {  // Функционал входа для разны
           class="login__form-auth_input" 
           v-model="password" 
           type="password" 
-          placeholder="Введите пороль"
+          placeholder="Введите пароль"
           autocomplete="on"
         >
         <ButtonUI @click="loginFormSubmit" class="login__from-auth_submit-buttonUI">Войти</ButtonUI>

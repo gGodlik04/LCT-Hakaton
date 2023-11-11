@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, toRaw } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useGlobalStore } from '@/stores/GlobalStore';
@@ -13,7 +13,7 @@ export const useTasksStore = defineStore('tasksStore', {
   }),
   getters: {
     currentTasks() {
-      return this.tasks.filter(el => el.status != 4)
+      return this.tasks.filter(el => el.favorites != 4)
     },
     weekTasks() {
       return this.tasks.filter(el => el.status != 4)
@@ -22,7 +22,9 @@ export const useTasksStore = defineStore('tasksStore', {
       return this.tasks.filter(el => el.status == 4)
     },
     favoritesTasks() {
-      return this.tasks.filter(el => el.status != 4)
+        const rawTasks = toRaw(this.tasks)
+        const filteredTasks = rawTasks.filter(el => el.favorite == true)
+        return new Proxy(filteredTasks, {})
     },
     getAllTasks() {
       return this.tasks

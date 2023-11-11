@@ -2,7 +2,7 @@
 import Header from '@/components/Header.vue'
 import Task from '@/components/Task.vue'
 import NavbarEmployee from '@/components/NavbarEmployee.vue';
-import {ref, onMounted, computed} from 'vue'
+import {ref, onMounted, computed, toRaw} from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
 import TasksDependsTab from '@/components/TasksDependsTab.vue';
 
@@ -20,15 +20,20 @@ const getScreenWidth = () => {
 }
 
 const getArrayAmountTasks = (tasks) => {
-  const pinTasks = [];
-  const firstNumberTask = page.value * amountTasks.value - amountTasks.value;
-  for (let firstTask = firstNumberTask; (firstTask  != (firstNumberTask + amountTasks.value)) && ((firstTask - 1)< tasks.length); firstTask++) {
+  try {
+    const pinTasks = [];
+    const tasksRaw = toRaw(tasks)
+    const firstNumberTask = page.value * amountTasks.value - amountTasks.value;
+    for (let firstTask = firstNumberTask; (firstTask  != (firstNumberTask + amountTasks.value)) && ((firstTask - 1)< tasksRaw.length); firstTask++) {
     if (!tasks[firstTask]) {
       break
     }
     pinTasks.push(tasks[firstTask]);
   }
   return pinTasks;
+  } catch (error) {
+    
+  }
 }
 
 const getAmountTasksInSlider = () => {
@@ -41,19 +46,18 @@ const getAmountTasksInSlider = () => {
    else return 1
 }
 
-onMounted(() => {
+onMounted(async () => {
   getScreenWidth()
   amountTasks.value = getAmountTasksInSlider()
-  tasksStore.fetchTasks()
-  tasks.value = getAllTasks()
+  await tasksStore.fetchTasks()
+  tasks.value = tasksStore.getAllTasks
 })
 
 </script>
 
 <template>
-  <Header></Header>
-  <!-- <ModalWindow v-model:show="modalVisible">
-      dsadasdasdas
+  <!-- <Header></Header>
+  <ModalWindow v-model:show="modalVisible">
   </ModalWindow> -->
   <div class="main-header">
     Мои задачи
@@ -62,7 +66,7 @@ onMounted(() => {
     <NavbarEmployee class="navbar"/>
     <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
         <TasksDependsTab
-          :tasks="getArrayAmountTasks(tasksStore.currentTasks)"
+          :tasks="getArrayAmountTasks(tasks)"
         />
     </div>
     <!-- <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
@@ -139,6 +143,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     margin-right: 10px;
+    margin-top: 10px;
   }
 
   .active {
