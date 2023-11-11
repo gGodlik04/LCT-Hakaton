@@ -74,9 +74,8 @@ export const useTasksStore = defineStore('tasksStore', {
           headers: {
             Authorization: this.tokenLocalStorage
           }
-        }).then((res) => {
-          this.tasks = res.data.tasks;
         })
+        this.tasks = resTasks.data;
         globalStore.toggleLoading(false)    
       } catch (error) {
         globalStore.toggleLoading(false)    

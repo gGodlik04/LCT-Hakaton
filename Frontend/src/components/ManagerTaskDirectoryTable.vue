@@ -18,7 +18,7 @@ const tasksStore = useTasksStore()
 onMounted(async () => {
     await tasksStore.fetchTasks()
     dataTable.value = tasksStore.getAllTasks;
-    console.log(dataTable);
+    console.log(dataTable.value);
 })
 
 </script>
@@ -30,22 +30,25 @@ onMounted(async () => {
                 <th>Название задачи</th>
                 <th>Приоритет</th>
                 <th>Время выполнения</th>
-                <th>Условие назначения</th>
+                <th>Адрес точки задачи</th>
                 <th>Требуемый уровень сотрудника</th>
             </thead>
             <tbody>
-                <tr v-for="(task) in dataTable" :key="task.type">
-                    <td :key="type">
-                        {{ value }}
+                <tr v-for="(task) in dataTable" :key="task.uuid">
+                    <td :key="task.uuid">
+                        {{ task.task_type.name}}
                     </td>
-                    <td :key="type">
-                        {{ value }}
+                    <td :key="task.uuid">
+                        {{ task.task_type.priority}}
                     </td>
-                    <td :key="type">
-                        {{ value }}
+                    <td :key="task.uuid">
+                        {{ task.task_type.work_time }} час.
                     </td>
-                    <td :key="type">
-                        {{ value }}
+                    <td :key="task.uuid">
+                        {{ task.agent_point.address}}
+                    </td>
+                    <td :key="task.uuid">
+                        {{ task.task_type.grade }}
                     </td>
                 </tr>
             </tbody>
@@ -63,6 +66,10 @@ onMounted(async () => {
         backdrop-filter: blur(2px);
         margin-top: 24px;
         margin-right: 37px;
+    }
+    
+    table {
+        width: 100%;
     }
 
     th,td {
