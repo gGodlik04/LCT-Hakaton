@@ -3,7 +3,8 @@ import uuid
 from django.conf import settings
 
 from directories.models import TaskTypeModel, AgentPointModel
-from .status import TaskStatusChoices, TaskPriorityChoices
+from .status import TaskStatusChoices
+
 '''class ObjectsTimeControl(models.Model):
     created_on = models.DateTimeField(verbose_name='Время создания', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='Время изменения', auto_now=True)
@@ -16,7 +17,7 @@ class Task(models.Model):
 
     uuid = models.UUIDField('UUID', primary_key=True, default=uuid.uuid4, editable=False)
     appointment_date = models.DateField('Время начала задачи', null=True,)
-    priority = models.PositiveSmallIntegerField('Приоритет', choices=TaskPriorityChoices.choices, null=True)
+    priority = models.PositiveSmallIntegerField('Приоритет', null=True,)
     status = models.PositiveSmallIntegerField('Статус задачи', choices=TaskStatusChoices.choices, default=1)
     comment = models.TextField('Коментарий к задаче', null=True)
     favorite = models.BooleanField('Избранное?', default=False)

@@ -1,0 +1,4 @@
+venv
+Frontend/node_modules
+DbData/dbfiles
+.idea
