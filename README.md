@@ -1,14 +1,11 @@
-# Created by Lena, Arseniy, Eduard and Radik.
-# Our team called MISHLEN. Hope you enjoy our project!
-# Project for LCT-Hackathon. Topic No. 4: "Automatic task distribution service for field employees from Sovcombank." 
+# created by MISHLEN (Lena, Arseniy, Eduard and Radik)
+# project for LCT-Hackathon. Topic No. 4: "Automatic task distribution service for field employees from Sovcombank." 
 
-# Deploy project
+# for deploy project
 docker-compose up -d -- build     (FIRST DEPLOY)
 docker-compose up -d              (NEXT UP)
 
+# url of project 
+http://46.243.226.123:3050/
 
-#Migrations 
-api container :
-python manage.py makemigrations
-
-python manage.py migrate
+#data initialized already in project
