@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
     'directories.apps.DirectoriesConfig',
+    'graphs.apps.GraphsConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',

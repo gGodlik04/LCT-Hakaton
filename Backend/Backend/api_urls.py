@@ -4,5 +4,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('task/', include('tasks.urls')),
     path('directories/', include('directories.urls')),
-
+    path('charts/', include('graphs.urls'))
 ]
+
