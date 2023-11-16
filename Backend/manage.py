@@ -1,14 +1,8 @@
 import os
 import sys
-from tasks.scheduler import start_scheduler
-from apscheduler.schedulers.background import BackgroundScheduler
-
 
 def main():
 
-    scheduler = BackgroundScheduler()
-    start_scheduler(scheduler)
-    scheduler.start()
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Backend.settings')
     try:

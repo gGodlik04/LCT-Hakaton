@@ -1,7 +1,7 @@
 version: '3.9'
 services:
     postgres:
-        image: postgres:15-alpine
+        image: postgres:15.1
         ports:
             - "5432:5432"
         environment:
@@ -13,12 +13,3 @@ services:
             - ./DbData:/var/lib/postgresql/data
             - ./DbData:/docker-entrypoint-initdb.d/
         container_name: pgdb
-
-    api:
-        build:
-            dockerfile: Backend/Dockerfile.dev
-        volumes:
-            - ./Backend:/app
-        command: "python manage.py runserver"
-        depends_on:
-            -   postgres

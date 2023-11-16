@@ -7,11 +7,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 
 from tasks.models import Task
-from .serializers import ChartSerializer
 
 
 class ChartView(viewsets.GenericViewSet):
-    serializer_class = ChartSerializer
     queryset = Task.objects.all()
     permission_classes = [IsAuthenticated]
 
