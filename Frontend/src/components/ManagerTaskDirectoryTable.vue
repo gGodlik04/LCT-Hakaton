@@ -59,6 +59,7 @@ onMounted(async () => {
     .table-tasks {
         font-size: 14px;
         height: 100%;
+        overflow: hidden;
         font-family: 'MontseratReg';
         color: var(--font-color);
         background: var(--color-accent);

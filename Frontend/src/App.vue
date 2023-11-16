@@ -5,10 +5,6 @@ import { onMounted } from 'vue';
 import { useGlobalStore } from '@/stores/GlobalStore';
 import router from '@/router';
 
-onMounted(() => {
-  router.push({ path: '/' })
-})
-
 const globalStore = useGlobalStore();
 
 const tasksStore = useTasksStore();

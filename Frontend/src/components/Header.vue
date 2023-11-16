@@ -50,7 +50,6 @@ const toggleTheme = () => {
         <div 
             class="header__gps-navbar" 
             :class="isLoginPage ? 'header__gps-navbar-hidden' : ''"
-            @click="openNavbarMobile"
         >
             <NavbarIcon 
                 @click="globalStore.toggleNavbar" 
@@ -210,7 +209,7 @@ const toggleTheme = () => {
     border-radius: 50%;
     }
 
-    @media (max-width: $screen-sm) {
+    @media (max-width: $screen-md) {
         .header-login {
             justify-content: center;
         }

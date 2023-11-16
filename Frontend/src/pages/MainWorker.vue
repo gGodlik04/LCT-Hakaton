@@ -2,50 +2,22 @@
 import Header from '@/components/Header.vue'
 import Task from '@/components/Task.vue'
 import NavbarEmployee from '@/components/NavbarEmployee.vue';
-import {ref, onMounted, computed} from 'vue'
+import {ref, onMounted, computed, toRaw} from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
+import { useGlobalStore } from '../stores/GlobalStore';
 import TasksDependsTab from '@/components/TasksDependsTab.vue';
+import YandexMapBlock from '@/components/YandexMapBlock.vue';
 
 
 const tasksStore = useTasksStore();
+const globalStore = useGlobalStore();
 
-const amountTasks = ref(0)
-const screenWidth = ref(1980)
-const page = ref(1)
 const tasks = ref()
 const show = ref(false)
 
-const getScreenWidth = () => {
-  screenWidth.value = window.screen.width;
-}
-
-const getArrayAmountTasks = (tasks) => {
-  const pinTasks = [];
-  const firstNumberTask = page.value * amountTasks.value - amountTasks.value;
-  for (let firstTask = firstNumberTask; (firstTask  != (firstNumberTask + amountTasks.value)) && ((firstTask - 1)< tasks.length); firstTask++) {
-    if (!tasks[firstTask]) {
-      break
-    }
-    pinTasks.push(tasks[firstTask]);
-  }
-  return pinTasks;
-}
-
-const getAmountTasksInSlider = () => {
-   if (screenWidth.value >= 1440) {
-    return 6
-  }
-  if ((screenWidth.value < 1440) && (screenWidth.value >= 768)) {
-    return 2
-   } 
-   else return 1
-}
-
-onMounted(() => {
-  getScreenWidth()
-  amountTasks.value = getAmountTasksInSlider()
-  tasksStore.fetchTasks()
-  tasks.value = getAllTasks()
+onMounted(async () => {
+  await tasksStore.fetchTasks()
+  tasks.value = tasksStore.getAllTasks
 })
 
 </script>
@@ -53,23 +25,23 @@ onMounted(() => {
 <template>
   <Header></Header>
   <!-- <ModalWindow v-model:show="modalVisible">
-      dsadasdasdas
   </ModalWindow> -->
   <div class="main-header">
     Мои задачи
   </div>
   <div class="container">
-    <NavbarEmployee class="navbar"/>
+    <NavbarEmployee 
+      class="navbar"
+      :class="globalStore.getFlagNavbar ? 'active-navbar' : 'inactive-navbar'"
+    />
     <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
         <TasksDependsTab
-          :tasks="getArrayAmountTasks(tasksStore.currentTasks)"
+         :tasks="tasks" 
         />
     </div>
-    <!-- <div class="tasks-block tasks-block-current" v-if="tasksStore.activeTab == 1">
-        <TasksDependsTab
-          :tasks="tasksStore.tasks"
-        />
-    </div> -->
+    <div class="tasks-block map-block" v-if="tasksStore.activeTab == 2">
+        <YandexMapBlock/>
+    </div>
     <div class="tasks-block tasks-block-week" v-if="tasksStore.activeTab == 3">
         <TasksDependsTab
           :tasks="tasksStore.weekTasks"
@@ -86,14 +58,6 @@ onMounted(() => {
         />
     </div>
   </div>
-  <div class="navigation">
-    <div class="navigation-left">
-      <ArrowLeft/>
-    </div>
-    <div class="navigation-right">
-      <ArrowRight/>
-    </div>
-  </div>
 </template>
 
 <style scoped lang="scss">
@@ -108,20 +72,27 @@ onMounted(() => {
     grid-template-areas: "navbar tasks" "navbar navigation";
   } 
 
-  .navigation {
-    grid-area: 'navigation';
-  }
-
   .navbar {
     grid-area: 'navbar';
   }
 
   .tasks-block {
     grid-area: 'tasks';
-    display: grid;
-    grid-template-columns: 31% 31% 31%;
-    grid-template-rows: 50% 50%;
+    // display: grid;
+    // grid-template-columns: 31% 31% 31%;
+    // grid-template-rows: 50% 50%;
+    // gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    // flex: 1 266.66px 266.66px;
     gap: 20px;
+  }
+
+  @media (max-width: $screen-md) {
+    .container {
+      display: block;
+    }
   }
 
   .main-header {
@@ -139,6 +110,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     margin-right: 10px;
+    margin-top: 10px;
   }
 
   .active {
@@ -157,65 +129,94 @@ onMounted(() => {
         backdrop-filter: blur(20px);
         display: none;
     }
-    .tasks-block {
-      grid-area: 'tasks';
-      display: grid;
-      grid-template-columns: 50% 50%;
-      grid-template-rows: fit-content;
-      gap: 20px;
-      justify-items: center;
-    }
+    // .tasks-block {
+    //   grid-area: 'tasks';
+    //   display: grid;
+    //   grid-template-columns: 50% 50%;
+    //   grid-template-rows: fit-content;
+    //   gap: 20px;
+    //   justify-items: center;
+    // }
 
-    .container {
-      grid-template-rows: fit-content 1%;
-      grid-template-areas: "navbar tasks" "navbar navigation";
-    }
+    // .container {
+    //   grid-template-rows: fit-content 1%;
+    //   grid-template-areas: "navbar tasks" "navbar navigation";
+    // }
     
     .navigation {
       margin: 16px 0px 11px 135px;
     }
   }
-  @media (max-width: $screen-sm) {
-    .tasks-block {
-      grid-area: 'tasks';
-      display: grid;
-      grid-template-columns: 50% 50%;
-      grid-template-rows: fit-content fit-content;
-      gap: 20px;
-      justify-items: center;
-    }
+  // @media (max-width: $screen-sm) {
+  //   .tasks-block {
+  //     grid-area: 'tasks';
+  //     display: grid;
+  //     grid-template-columns: 50% 50%;
+  //     grid-template-rows: fit-content fit-content;
+  //     gap: 20px;
+  //     justify-items: center;
+  //   }
 
-    .container {
-      align-content: center;
-      grid-template-columns: 100% 50%;
-      grid-template-rows: fit-content 1%;
-      grid-template-areas: "tasks tasks" "navigation navigation";
-    } 
+  //   .container {
+  //     align-content: center;
+  //     grid-template-columns: 100% 50%;
+  //     grid-template-rows: fit-content 1%;
+  //     grid-template-areas: "tasks tasks" "navigation navigation";
+  //   } 
 
-  @media (max-width: $screen-small) {
-    .tasks-block {
-      grid-area: 'tasks';
-      display: grid;
-      grid-template-columns: 100%;
-      grid-template-rows: fit-content fit-content;
-      gap: 20px;
-      justify-items: center;
-    }
+  // @media (max-width) {
+    
+  // }
 
-    .container {
-      align-content: center;
-      grid-template-columns: 100% 50%;
-      grid-template-rows: fit-content 1%;
-      grid-template-areas: "tasks tasks" "navigation navigation";
-    } 
+  // @media (max-width: $screen-small) {
+  //   .tasks-block {
+  //     grid-area: 'tasks';
+  //     display: grid;
+  //     grid-template-columns: 100%;
+  //     grid-template-rows: fit-content fit-content;
+  //     gap: 20px;
+  //     justify-items: center;
+  //   }
 
-    .navigation {
-      margin: 16px 0px 11px 20px;
-    }
+  //   .container {
+  //     align-content: center;
+  //     grid-template-columns: 100% 50%;
+  //     grid-template-rows: fit-content 1%;
+  //     grid-template-areas: "tasks tasks" "navigation navigation";
+  //   } 
 
+  //   .navigation {
+  //     margin: 16px 0px 11px 20px;
+  //   }
+
+  //   .main-header {
+  //     justify-content: center;
+  //   }
+  // }
+// }
+@media (max-width: $screen-md) {
     .main-header {
-      justify-content: center;
+        flex-wrap: wrap;
     }
-  }
+    .active-navbar {
+        display: flex;
+    }
+
+    .inactive-navbar {
+        display: none;
+    }
+    .main-header__buttons {
+        min-width: 5%;
+        font-size: 1px;
+    }
+    .container-wrapper {
+        display: block;
+    }
 }
+
+@media (max-width: $screen-small) {
+    .navbar {
+        width: 60%;
+    }  
+  }
 </style>

@@ -17,7 +17,7 @@ onMounted (() => {
 
 <template>
     <Task v-for="(task) in tasks"
-        :key="task.address"
+        :key="task.uuid"
         :task="task"
     />
 </template>

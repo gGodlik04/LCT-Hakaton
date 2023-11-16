@@ -38,7 +38,7 @@ const addPointFormSubmit = async (form) => {
 
 <template>
     <div class="form__add-point">
-        <div class="form__add-point-title">Добавить агентскую точку</div>
+        <div class="form__add-point-title">Редактировать агентскую точку</div>
 
             <form>
                 <div class="form__add-point-input-title">Адрес точки:
@@ -59,7 +59,7 @@ const addPointFormSubmit = async (form) => {
                 placeholder="Укажите значение" 
                 >
             </div>
-                <div class="form__add-point-input-title">Карты и материалы доставлены? (1-да/0-нет)
+                <div class="form__add-point-input-title">Карты и материалы доставлены? (1/0)
                 <input 
                 type="text" 
                 class="form__add-point-input form__add-point-dateFromDelivery" 
