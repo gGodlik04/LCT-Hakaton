@@ -15,7 +15,6 @@ services:
             - ./DbData:/docker-entrypoint-initdb.d/
         container_name: pgdb
 
-
     nginx:
         depends_on:
             - api

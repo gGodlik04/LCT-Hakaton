@@ -36,22 +36,24 @@ class TaskViewSet(mixins.ListModelMixin,
 
     def list(self, request, *args, **kwargs):
         user = self.request.user
-        queryset = self.filter_queryset(self.get_queryset())
-        serializer = self.get_serializer(queryset, many=True)
-
-        if user.is_worker_user():
-            queryset = queryset.filter(employee=user, status=1)
-            serializer = self.get_serializer(queryset, many=True)
-            return Response(serializer.data)
-
-        return Response(serializer.data)
-
-    @action(methods=['get'], detail=False)
-    def all(self, request):
-        user = self.request.user
         queryset = self.get_queryset()
 
         if user.is_manager_user():
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data, status.HTTP_200_OK)
+        else:
+            queryset = self.filter_queryset(self.get_queryset())
+            queryset = queryset.filter(employee=user)
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data, status.HTTP_200_OK)
+
+    @action(methods=['get'], detail=False)
+    def employee(self, request):
+        user = self.request.user
+        queryset = self.filter_queryset(self.get_queryset())
+
+        if user.is_worker_user():
+            queryset = queryset.filter(employee=user)
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
@@ -73,25 +75,26 @@ class TaskViewSet(mixins.ListModelMixin,
         serializer = self.get_serializer(task)
         return Response(serializer.data)
 
-    @action(methods=['put'], detail=True)
+    @action(methods=['patch'], detail=True)
     def favorite(self, request, pk=None):
 
         task = self.get_object()
-        task.favorite = request.data.get('favorite')
-        task.save()
-        #serializer = self.get_serializer(task, data=request.data)
-            #serializer.is_valid(raise_exception=True):
-                #self.perform_update(serializer)
-        return Response({'status': 'favorite updated'}, status.HTTP_200_OK)
+        data = {'favorite': request.data['favorite']}
+        serializer = TaskSerializer(task, data=data, partial=True)
 
-    @action(methods=['put'], detail=True)
+        if serializer.is_valid():
+            self.perform_update(serializer)
+            return Response(f'favorite was updated {data}', status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=['patch'], detail=True)
     def status(self, request, pk=None):
 
         task = self.get_object()
-        task.status = request.data.get('status')
-        task.save()
+        data = {'status': request.data['status']}
+        serializer = TaskSerializer(task, data=data, partial=True)
+        if serializer.is_valid():
+            self.perform_update(serializer)
+            return Response(f'status was updated {data} ', status.HTTP_200_OK)
 
-        #serializer = self.get_serializer(task)
-        #if serializer.is_valid(raise_exception=True):
-        #    self.perform_update(serializer)
-        return Response({'status': 'status updated'}, status.HTTP_200_OK)
