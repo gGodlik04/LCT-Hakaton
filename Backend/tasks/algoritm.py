@@ -2,12 +2,15 @@ import math
 import time
 
 import numpy as np
-import pandas as pd
 import requests
 from yandex_geocoder import Client
-from sqlalchemy import create_engine
 from datetime import datetime
 import uuid
+
+
+from environs import Env
+import pandas as pd
+from sqlalchemy import create_engine
 
 
 class TaskDistributor:
@@ -230,7 +233,7 @@ class TaskDistributor:
                     # Добавляем запись в DataFrame
                     self.task.loc[len(self.task)] = new_data
 
-    def run_distribution(self):
+    def run_distribution(self, connection_string):
         # Перепроверяем выполненные задачи, если прошло более 7 дней
         self.check_point()
 
@@ -251,32 +254,4 @@ class TaskDistributor:
         self.task.to_csv('points.csv', index=False)
         self.task.to_sql('Task', connection_string, index=False, if_exists='replace')
 
-
-if __name__ == "__main__":
-    connection_string = create_engine(
-        'postgresql://fzpvuodf:ZJhLvoXnBVUJRGxCkDNpMvWmddimNytV@cornelius.db.elephantsql.com/fzpvuodf')
-
-    query_for_users = 'SELECT * FROM accounts_user'
-    query_for_points = 'SELECT * FROM "AgentPoint"'
-    query_for_task = 'SELECT * FROM "Task"'
-    query_for_task_type = 'SELECT * FROM "TaskType"'
-
-    df_users = pd.read_sql(query_for_users, connection_string)
-    df_users = df_users[df_users["role"] == 2]
-
-    df_points = pd.read_sql(query_for_points, connection_string)
-    df_task = pd.read_sql(query_for_task, connection_string)
-    df_task_type = pd.read_sql(query_for_task_type, connection_string)
-
-    df_points['uuid'] = df_points['uuid'].astype(str)
-    df_task['agent_point_id'] = df_task['agent_point_id'].astype(str)
-    points_task = pd.merge(df_points, df_task,
-                           left_on='uuid', right_on='agent_point_id', how='outer', suffixes=('_x', ''))
-
-    task_distributor = TaskDistributor(points_task, df_users, df_task, df_task_type,
-                                       'your_yandex_api',
-                                       'your_openroute_api')
-    task_distributor.run_distribution()
-
-    connection_string.dispose()
 

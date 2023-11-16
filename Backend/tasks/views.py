@@ -5,7 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from tasks.models.tasks import Task
 from tasks.serializers import TaskSerializer, CreateTaskSerializer
-
+from .tasks import send_tasks
+import logging
 
 class TaskViewSet(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
@@ -49,13 +50,22 @@ class TaskViewSet(mixins.ListModelMixin,
 
     @action(methods=['get'], detail=False)
     def employee(self, request):
-        user = self.request.user
-        queryset = self.filter_queryset(self.get_queryset())
 
-        if user.is_worker_user():
-            queryset = queryset.filter(employee=user)
-            serializer = self.get_serializer(queryset, many=True)
-            return Response(serializer.data)
+        try:
+            send_tasks.delay()
+        except Exception as e:
+            logging.error(f'Something went wrong {e}')
+            return Response(status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status.HTTP_200_OK)
+
+       #user = self.request.user
+       # queryset = self.filter_queryset(self.get_queryset())
+
+       # if user.is_worker_user():
+          #  queryset = queryset.filter(employee=user)
+           # serializer = self.get_serializer(queryset, many=True)
+          #  return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         user = self.request.user
