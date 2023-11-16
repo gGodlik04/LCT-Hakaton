@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref, toRaw } from 'vue';
 import { useManagerStore } from '@/stores/ManagerStore';
+import FormEditPoint from '@/components/FormEditPoint.vue'
+import ModalUI from '@/components/UI/ModalUI.vue';
+
 
 const managerStore = useManagerStore()
 
@@ -11,9 +14,18 @@ onMounted(async () => {
     dataTable.value = managerStore.allPoints
 })
 
+const fetchData = (event) => {
+    modalVisible.value = event
+}
+
+const modalVisible = ref(false);
+
 </script>
 
 <template>
+<ModalUI :show="modalVisible" class="modal-window-points" @visibleModal="fetchData($event)">
+    <FormEditPoint/>
+</ModalUI>
     <div class="table-points">
         <table>
             <thead>
@@ -44,6 +56,13 @@ onMounted(async () => {
                     <td :key="point.uuid">
                         {{ point.num_given_cards }}
                     </td>
+                    <td>
+                        <ButtonUI 
+                            @click="modalVisible=true"
+                            class="edit">
+                            Редактировать
+                        </ButtonUI>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -62,15 +81,18 @@ onMounted(async () => {
         margin-right: 37px;
     }
 
+    .edit{
+        font-size: 14px;
+    }
+
     th,td {
         padding: 20px;
         height: 20px;
         text-align: center;
-        min-width: 100px;
+        min-width: 50px;
     }
 
     table {
-        // table-layout: fixed;
         width: 100%;
         border-collapse: collapse;
         table-layout: fixed;

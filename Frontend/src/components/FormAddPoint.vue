@@ -59,7 +59,7 @@ const addPointFormSubmit = async (form) => {
                 placeholder="Укажите значение" 
                 >
             </div>
-                <div class="form__add-point-input-title">Карты и материалы доставлены? (1/0)
+                <div class="form__add-point-input-title">Карты и материалы доставлены? (1-да/0-нет)
                 <input 
                 type="text" 
                 class="form__add-point-input form__add-point-dateFromDelivery" 

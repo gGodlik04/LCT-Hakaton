@@ -2,20 +2,30 @@
 import { ref, computed } from 'vue'
 import { useTasksStore } from '../stores/TasksStore';
 import { storeToRefs } from 'pinia';
+import { useGlobalStore } from '../stores/GlobalStore';
 
+const globalStore = useGlobalStore();
 const tasksStore = useTasksStore();
-const {activeTab} = storeToRefs(tasksStore)
+const {activeTab} = storeToRefs(tasksStore);
 
 
 const changeTab = (id) => {
     tasksStore.setActiveTab(id);
 }
 
+const exitAccount = () => {
+    window.localStorage.removeItem('token')
+    location.reload()
+}
 
 </script>
 
 <template>
     <div class="navbar">
+        <Close 
+            class="navbar-manager-close"
+            @click="globalStore.toggleNavbar()"
+            />
         <div 
             @click="changeTab(1)" 
             class="navbar__current" 
@@ -51,6 +61,12 @@ const changeTab = (id) => {
         >
             Избранные
         </div>
+        <div
+            class="navbar__exit"
+            @click="exitAccount"
+        >
+            Выйти
+        </div>
     </div>
 </template>
 
@@ -74,8 +90,21 @@ const changeTab = (id) => {
     padding-left: 30px;
 }
 
+.navbar-manager-close {
+    display: none;
+}
+
+.navbar-manager {
+    color: var(--font-color) !important;
+}
+
 @media (max-width: $screen-md) { 
-    .navbar:first-child {
+    .navbar-manager-close {
+        display: block;
+        align-self: end;
+        margin-top: 20px;
+    }
+    .navbar-manager:nth-child(2n){
         padding-top: 75px;
     }
 }

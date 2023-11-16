@@ -6,4 +6,7 @@ def start_scheduler(scheduler):
     scheduler.add_job(send_tasks, 'cron', hour='08',
                       minute='00', day_of_week='mon-fri',
                       timezone='Europe/Moscow',)
+#    scheduler.add_job(send_tasks, 'interval',
+#                      minute='03', day_of_week='mon-fri',
+#                      timezone='Europe/Moscow',)
 

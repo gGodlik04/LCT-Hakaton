@@ -11,6 +11,7 @@ class AgentPointViewSet(viewsets.GenericViewSet,
                         mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin):
+    
     permission_classes = [IsAuthenticated, ]
     queryset = AgentPointModel.objects.all()
     serializer_class = AgentPointSerializer

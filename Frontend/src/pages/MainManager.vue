@@ -10,6 +10,8 @@ import { useGlobalStore } from '@/stores/GlobalStore';
 import FormAddPoint from '@/components/FormAddPoint.vue';
 import {ref, defineEmits} from 'vue'
 import ModalUI from '@/components/UI/ModalUI.vue';
+import { useTasksStore } from '../stores/TasksStore';
+
 
 const globalStore = useGlobalStore();
 const managerStore = useManagerStore();
@@ -170,7 +172,7 @@ const modalVisible = ref(false);
 
 @media (max-width: $screen-small) {
     .navbar-manager {
-        width: 100%;
+        width: 80%;
     }
     .main-header__button {
         display: block;

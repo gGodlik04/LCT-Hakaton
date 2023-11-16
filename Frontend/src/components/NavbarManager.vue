@@ -10,6 +10,11 @@ const globalStore = useGlobalStore();
 const managerStore = useManagerStore();
 const {activeTab} = storeToRefs(managerStore)
 
+const exitAccount = () => {
+    window.localStorage.removeItem('token')
+    location.reload()
+}
+
 const changeTab = (id) => {
     managerStore.setActiveTab(id)
 }
@@ -50,6 +55,12 @@ const changeTab = (id) => {
         >
         Информационная панель
         </div>
+        <div
+            class="navbar__exit"
+            @click="exitAccount"
+        >
+            Выйти
+        </div>
     </div>
 </template>
 
@@ -69,6 +80,7 @@ const changeTab = (id) => {
 .navbar-manager {
     color: var(--font-color) !important;
 }
+
 
 @media (max-width: $screen-md) { 
     .navbar-manager-close {

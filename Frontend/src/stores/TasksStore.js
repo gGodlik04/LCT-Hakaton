@@ -43,6 +43,11 @@ export const useTasksStore = defineStore('tasksStore', {
     setActiveTab(id) {
       this.activeTab = id
     },
+    
+    changeStatusTask(uuid) {
+        this.tasks.find(el => el.uuid == uuid).status++;       
+        console.log(this.tasks);
+    },
 
     async login(email, password) {
       try {
