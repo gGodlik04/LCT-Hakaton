@@ -1,9 +1,9 @@
 version: '3.9'
 services:
     postgres:
-        image: postgres:13.3
+        image: postgres:15.1
         ports:
-            - 5432:5432
+            - "5432:5432"
         environment:
             POSTGRES_USER: username
             POSTGRES_PASSWORD: postgresql_password
@@ -11,13 +11,12 @@ services:
             PGDATA: /var/lib/postgresql/data/dbfiles
         volumes:
             - ./DbData:/var/lib/postgresql/data
-           # - postgresql.conf:/etc/postgresql.conf
             - ./DbData:/docker-entrypoint-initdb.d/
         container_name: pgdb
 
     nginx:
         depends_on:
-            - api
+            - django
             - frontend
         restart: always
         build:
@@ -25,15 +24,28 @@ services:
             context: './nginx'
         ports:
             - "3050:80"
-    api:
+
+    redis:
+        container_name: redis
+        restart: unless-stopped
+        image: redis:7.0.5-alpine
+        ports:
+            - "6379:6379"
+
+    django:
+        container_name: django
         build:
             dockerfile: Dockerfile.dev
             context: './Backend'
+        environment:
+            CELERY_BROKER_URL: "redis://redis:6379/0"
+            CELERY_RESULT_BACKEND: "redis://redis:6379/0"
         volumes:
             - ./Backend:/app
         command: "gunicorn -c gunicorn.py Backend.wsgi"
         depends_on:
-            -   postgres
+            -  postgres
+            -  redis
     frontend:
         stdin_open: true
         build:
@@ -42,4 +54,16 @@ services:
         volumes:
             - /app/node_modules
             - ./Frontend:/app
+
+    celery:
+        build:
+            dockerfile: Dockerfile.dev
+            context: './Backend'
+        command:
+            -  "celery -A Backend worker --loglevel=info "
+        volumes:
+            - ./Backend:/app
+        depends_on:
+            - django
+            - redis
 
