@@ -1,6 +1,7 @@
 version: '3.9'
 services:
     postgres:
+        restart: on-failure
         image: postgres:15.1
         ports:
             - "5432:5432"
@@ -15,6 +16,7 @@ services:
         container_name: pgdb
 
     nginx:
+        container_name: nginx
         depends_on:
             - django
             - frontend
@@ -37,9 +39,6 @@ services:
         build:
             dockerfile: Dockerfile.dev
             context: './Backend'
-        environment:
-            CELERY_BROKER_URL: "redis://redis:6379/0"
-            CELERY_RESULT_BACKEND: "redis://redis:6379/0"
         volumes:
             - ./Backend:/app
         command: "gunicorn -c gunicorn.py Backend.wsgi"
@@ -47,6 +46,7 @@ services:
             -  postgres
             -  redis
     frontend:
+        container_name: frontend
         stdin_open: true
         build:
             dockerfile: Dockerfile.dev
@@ -55,13 +55,17 @@ services:
             - /app/node_modules
             - ./Frontend:/app
 
-    celery:
-        build:
-            dockerfile: Dockerfile.dev
-            context: './Backend'
-        command: celery -A Backend worker
-        volumes:
-            - ./Backend:/app
-        depends_on:
-            - redis
+#    celery:
+#        container_name: celery
+#        build:
+#            dockerfile: Dockerfile.dev
+#            context: './Backend'
+#        command: celery -A Backend worker
+#        environment:
+#            CELERY_BROKER_URL: "redis://redis:6379/0"
+#            CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+#        volumes:
+#            - ./Backend:/app
+#        depends_on:
+#            - redis
 
