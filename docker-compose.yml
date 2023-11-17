@@ -59,11 +59,9 @@ services:
         build:
             dockerfile: Dockerfile.dev
             context: './Backend'
-        command:
-            -  "celery -A Backend worker --loglevel=info "
+        command: celery -A Backend worker
         volumes:
             - ./Backend:/app
         depends_on:
-            - django
             - redis
 
