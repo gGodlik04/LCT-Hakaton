@@ -1,14 +1,43 @@
 @import 'fonts/fonts.scss'
-    
+@import './theme.scss'
+@import './variables.scss'
+
 body
     margin: 0
     width: 100vw
-    height: 100vh
+    height: 100%
     padding: 0
     box-sizing: border-box
-    background-color: #00091F
+    background-color: var(--color-primary)
     font-family: 'Montserat'
-    background-image: url('../images/SovcomBankLogo.png')
+    background-attachment: fixed
+    background-image: url('../images/SovcomBankLogoDark.png')
     background-position: center
     background-size: contain
     background-repeat: no-repeat
+
+body::-webkit-scrollbar
+    width: 3px
+
+body::-webkit-scrollbar-track 
+    background: var(--color-status)
+
+body::-webkit-scrollbar-thumb
+  background-color: blue
+  border-radius: 100px
+  border: 3px solid #DA5155
+
+
+html
+    height: 100%
+    position: relative
+    overflow-x: hidden
+
+input:active:hover:focus 
+    outline: none !important
+    outline-offset: 0 !important
+    box-shadow: none
+
+
+
+

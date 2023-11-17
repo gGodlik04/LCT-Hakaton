@@ -1,32 +1,63 @@
 <script setup>
 import Header from '@/components/Header.vue'
+import {ref, onMounted} from 'vue'
+import { useTasksStore } from '../stores/TasksStore';
+import ModalLoading from '../components/UI/ModalLoading.vue';
+import { useGlobalStore } from '@/stores/GlobalStore';
 
-  const loginFormSubmit = (e) => {
-    document.querySelector('.login__from-auth_submit-button').click();
-  }
 
+
+
+const globalStore = useGlobalStore();
+
+
+const tasksStore = useTasksStore();
+
+
+const email = ref('');
+const password = ref('');
+
+const loginFormSubmit = async () => {
+  tasksStore.login(email.value, password.value)
+}
+
+const setActive = (e) => {  // Функционал входа для разных ролей реализован через один метод API. Выбор роли для дизайна.
+  document.querySelector('.active').classList.remove('active');
+  e.srcElement.classList.add('active');
+}
 </script>
 
 <template>
-  <Header></Header>
+  <Header class="header"></Header>
   <div class="login-wrapper"></div>
   <div class="login login-bg">
     <div class="login__title">Добро пожаловать!</div>
     <div class="login__role">
-      <div class="login__role_manager active">Менеджер</div>
-      <div class="login__role_worker">Сотрудник</div>
+      <div class="login__role_manager active" @click="setActive">Менеджер</div>
+      <div class="login__role_worker" @click="setActive">Сотрудник</div>
     </div>
     <div class="login__form"></div>
-      <form class="login__form-auth" method="post" action="">
-        <input class="login__form-auth_input" type="text" autofocus placeholder="Введите логин">
-        <input class="login__form-auth_input" type="password" placeholder="Введите пороль">
-        <input type="submit" class="login__from-auth_submit-button"/>
+      <form class="login__form-auth">
+        <input 
+          class="login__form-auth_input" 
+          v-model="email" 
+          type="text" 
+          autofocus 
+          placeholder="Введите email" 
+          >
+          <input 
+          class="login__form-auth_input" 
+          v-model="password" 
+          type="password" 
+          placeholder="Введите пароль"
+          autocomplete="on"
+        >
         <ButtonUI @click="loginFormSubmit" class="login__from-auth_submit-buttonUI">Войти</ButtonUI>
       </form>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .login-wrapper {
     height: 15vh;
   }
@@ -34,20 +65,22 @@ import Header from '@/components/Header.vue'
     padding: 43px 75px 43px 75px;
     margin-top: auto;
     margin-bottom: auto;
-    color: #FFFFFF;
+    color: var(--color-secondary);
     margin-left: auto;
     margin-right: auto;
-    height: 350px;
+    height: 23em;
     font-weight: 500;
     border-radius: 30px;
     width: 15%;
     border: 3px solid #646464;
-    background: rgba(0, 9, 31, 0.8);
+    background: var(--color-accent);
     backdrop-filter: blur(2px);
+    color: var(--font-color-inactive);
   }
   .login__title {
     font-size: 23px;
     text-align: center;
+    color: var(--font-color);
   }
 
   .login__role {
@@ -72,19 +105,20 @@ import Header from '@/components/Header.vue'
     margin-top: 25px;
     border-radius: 10px;
     border: none;
-    background-color: #D0D0D0;
+    color: var(--input-color-text);
+    background-color: var(--input-color);
     text-align: center;
     font-size: 19px;
   }
   
   .active {
-    color: #AA1418;
+    color: var(--button-color);
   }
   .active:after {
     content: '';
     display: block;
     height: 3px; 
-    background: #AA1418; 
+    background: var(--button-color);
     width: 100%; 
     margin-top: 20px; 
 	  transition: 1s; 
@@ -100,5 +134,41 @@ import Header from '@/components/Header.vue'
   }
   .login__from-auth_submit-buttonUI:hover {
     scale: 1;
+  }
+
+  .theme-light {
+    .login {
+      border: 0px; 
+      box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  @media (max-width: $screen-lg) {
+    .login {
+      width: 20%;
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    .login {
+      width: 30%;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .login {
+      width: 40%;
+    }
+  }
+
+  @media (max-width: $screen-small) {
+    .login {
+      width: 70%;
+      height: 50%;
+      padding: 23px 35px 23px 35px;
+    }
+    .login__title, .login__role, .login__form-auth {
+      font-size: 13px;
+    }
   }
 </style>
