@@ -3,7 +3,6 @@ from tasks.models.tasks import Task
 from directories.serializers import TaskTypeSerializer, AgentPointSerializer
 from accounts.serializers import UserSerializer
 
-
 class CreateTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
