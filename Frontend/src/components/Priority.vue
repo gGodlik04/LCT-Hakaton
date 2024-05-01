@@ -10,12 +10,12 @@
 
 <template>
     <div v-if="priority == 1" class="priority-icon">
-        <HighPriority/>
+        <!-- <HighPriority/> -->
     </div>
     <div v-if="priority == 2" class="priority-icon">
-        <MediumPriority/>
+        <!-- <MediumPriority/> -->
     </div>
     <div v-if="priority == 3" class="priority-icon">
-        <LowPriority/>
+        <!-- <LowPriority/> -->
     </div>
 </template>

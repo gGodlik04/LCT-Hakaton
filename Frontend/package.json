@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "host": "vite --host"
+    "host": "vite --host",
+    "test": "jest --watch"
   },
   "dependencies": {
     "apexcharts": "^3.44.0",
@@ -20,8 +21,19 @@
     "vue3-apexcharts": "^1.4.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@eslint/js": "^9.1.1",
+    "@testing-library/vue": "^6.4.2",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "@vue/vue3-jest": "^28.1.0",
+    "babel-jest": "^28.1.3",
+    "eslint": "^9.1.1",
+    "eslint-plugin-vue": "^9.25.0",
+    "globals": "^15.1.0",
+    "jest": "^28.1.3",
+    "jest-environment-jsdom": "^29.7.0",
     "vite": "^4.4.11"
   }
 }
