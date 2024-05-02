@@ -1,5 +1,5 @@
 <template>
-    <div class="modal">
+    <div class="modal" data-testid="modal-loading">
         <div class="modal__content-loading">
             <div class="spinner icon-spinner-4" aria-hidden="true"></div>
         </div>
